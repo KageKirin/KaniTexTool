@@ -1,0 +1,269 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		83C0A51313772C78006ED394 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83C0A51213772C78006ED394 /* main.cpp */; };
+		83C0A51513772C93006ED394 /* libPVRTexLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 83C0A51413772C93006ED394 /* libPVRTexLib.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		83724B0D13772BA500391D7B /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		83724B0F13772BA500391D7B /* KaniTexTool */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = KaniTexTool; sourceTree = BUILT_PRODUCTS_DIR; };
+		83C0A51113772C78006ED394 /* KaniTexTool.1 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.man; name = KaniTexTool.1; path = src/KaniTexTool.1; sourceTree = "<group>"; };
+		83C0A51213772C78006ED394 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = src/main.cpp; sourceTree = "<group>"; };
+		83C0A51413772C93006ED394 /* libPVRTexLib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPVRTexLib.a; path = "addtional-libs/pvrtex/lib/MacOS_x86/libPVRTexLib.a"; sourceTree = "<group>"; };
+		83C0A51E13772F33006ED394 /* kaniDDS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kaniDDS.h; path = src/kani/file/kaniDDS.h; sourceTree = "<group>"; };
+		83C0A51F13772F33006ED394 /* kaniKTX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kaniKTX.h; path = src/kani/file/kaniKTX.h; sourceTree = "<group>"; };
+		83C0A52013772F33006ED394 /* kaniPNG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kaniPNG.h; path = src/kani/file/kaniPNG.h; sourceTree = "<group>"; };
+		83C0A52113772F33006ED394 /* kaniPVR.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kaniPVR.h; path = src/kani/file/kaniPVR.h; sourceTree = "<group>"; };
+		83C0A52513772F7B006ED394 /* kaniTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kaniTypes.h; path = src/kani/core/kaniTypes.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		83724B0C13772BA500391D7B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				83C0A51513772C93006ED394 /* libPVRTexLib.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		83724B0413772BA400391D7B = {
+			isa = PBXGroup;
+			children = (
+				83C0A51013772C5C006ED394 /* Frameworks */,
+				83C0A50F13772C48006ED394 /* Libraries */,
+				83C0A50E13772C3C006ED394 /* Sources */,
+				83724B1013772BA500391D7B /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		83724B1013772BA500391D7B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				83724B0F13772BA500391D7B /* KaniTexTool */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		83C0A50E13772C3C006ED394 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				83C0A52213772F3D006ED394 /* kani */,
+				83C0A51113772C78006ED394 /* KaniTexTool.1 */,
+				83C0A51213772C78006ED394 /* main.cpp */,
+			);
+			name = Sources;
+			sourceTree = "<group>";
+		};
+		83C0A50F13772C48006ED394 /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				83C0A51413772C93006ED394 /* libPVRTexLib.a */,
+			);
+			name = Libraries;
+			sourceTree = "<group>";
+		};
+		83C0A51013772C5C006ED394 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		83C0A52213772F3D006ED394 /* kani */ = {
+			isa = PBXGroup;
+			children = (
+				83C0A52613772F7F006ED394 /* core */,
+				83C0A52413772F5C006ED394 /* texture */,
+				83C0A52313772F48006ED394 /* file */,
+			);
+			name = kani;
+			sourceTree = "<group>";
+		};
+		83C0A52313772F48006ED394 /* file */ = {
+			isa = PBXGroup;
+			children = (
+				83C0A51E13772F33006ED394 /* kaniDDS.h */,
+				83C0A51F13772F33006ED394 /* kaniKTX.h */,
+				83C0A52013772F33006ED394 /* kaniPNG.h */,
+				83C0A52113772F33006ED394 /* kaniPVR.h */,
+			);
+			name = file;
+			sourceTree = "<group>";
+		};
+		83C0A52413772F5C006ED394 /* texture */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = texture;
+			sourceTree = "<group>";
+		};
+		83C0A52613772F7F006ED394 /* core */ = {
+			isa = PBXGroup;
+			children = (
+				83C0A52513772F7B006ED394 /* kaniTypes.h */,
+			);
+			name = core;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		83724B0E13772BA500391D7B /* KaniTexTool */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 83724B1813772BA500391D7B /* Build configuration list for PBXNativeTarget "KaniTexTool" */;
+			buildPhases = (
+				83724B0B13772BA500391D7B /* Sources */,
+				83724B0C13772BA500391D7B /* Frameworks */,
+				83724B0D13772BA500391D7B /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = KaniTexTool;
+			productName = KaniTexTool;
+			productReference = 83724B0F13772BA500391D7B /* KaniTexTool */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		83724B0613772BA400391D7B /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 83724B0913772BA400391D7B /* Build configuration list for PBXProject "KaniTexTool" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 83724B0413772BA400391D7B;
+			productRefGroup = 83724B1013772BA500391D7B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				83724B0E13772BA500391D7B /* KaniTexTool */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		83724B0B13772BA500391D7B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				83C0A51313772C78006ED394 /* main.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		83724B1613772BA500391D7B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		83724B1713772BA500391D7B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		83724B1913772BA500391D7B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/addtional-libs/pvrtex/lib/MacOS_x86\"",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		83724B1A13772BA500391D7B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/addtional-libs/pvrtex/lib/MacOS_x86\"",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		83724B0913772BA400391D7B /* Build configuration list for PBXProject "KaniTexTool" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				83724B1613772BA500391D7B /* Debug */,
+				83724B1713772BA500391D7B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		83724B1813772BA500391D7B /* Build configuration list for PBXNativeTarget "KaniTexTool" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				83724B1913772BA500391D7B /* Debug */,
+				83724B1A13772BA500391D7B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 83724B0613772BA400391D7B /* Project object */;
+}
