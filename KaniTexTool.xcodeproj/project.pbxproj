@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		83C0A51313772C78006ED394 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83C0A51213772C78006ED394 /* main.cpp */; };
-		83C0A51513772C93006ED394 /* libPVRTexLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 83C0A51413772C93006ED394 /* libPVRTexLib.a */; };
+		83C0A53013789228006ED394 /* pvrtex.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83C0A52F13789228006ED394 /* pvrtex.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -27,12 +27,12 @@
 		83724B0F13772BA500391D7B /* KaniTexTool */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = KaniTexTool; sourceTree = BUILT_PRODUCTS_DIR; };
 		83C0A51113772C78006ED394 /* KaniTexTool.1 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.man; name = KaniTexTool.1; path = src/KaniTexTool.1; sourceTree = "<group>"; };
 		83C0A51213772C78006ED394 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = src/main.cpp; sourceTree = "<group>"; };
-		83C0A51413772C93006ED394 /* libPVRTexLib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPVRTexLib.a; path = "addtional-libs/pvrtex/lib/MacOS_x86/libPVRTexLib.a"; sourceTree = "<group>"; };
 		83C0A51E13772F33006ED394 /* kaniDDS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kaniDDS.h; path = src/kani/file/kaniDDS.h; sourceTree = "<group>"; };
 		83C0A51F13772F33006ED394 /* kaniKTX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kaniKTX.h; path = src/kani/file/kaniKTX.h; sourceTree = "<group>"; };
 		83C0A52013772F33006ED394 /* kaniPNG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kaniPNG.h; path = src/kani/file/kaniPNG.h; sourceTree = "<group>"; };
 		83C0A52113772F33006ED394 /* kaniPVR.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kaniPVR.h; path = src/kani/file/kaniPVR.h; sourceTree = "<group>"; };
 		83C0A52513772F7B006ED394 /* kaniTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kaniTypes.h; path = src/kani/core/kaniTypes.h; sourceTree = "<group>"; };
+		83C0A52F13789228006ED394 /* pvrtex.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = pvrtex.framework; path = "addtional-libs/pvrtex/Library/Frameworks/pvrtex.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,7 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				83C0A51513772C93006ED394 /* libPVRTexLib.a in Frameworks */,
+				83C0A53013789228006ED394 /* pvrtex.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,7 +78,6 @@
 		83C0A50F13772C48006ED394 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				83C0A51413772C93006ED394 /* libPVRTexLib.a */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -86,6 +85,7 @@
 		83C0A51013772C5C006ED394 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				83C0A52F13789228006ED394 /* pvrtex.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -217,6 +217,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/addtional-libs/pvrtex/Library/Frameworks\"",
+				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				LIBRARY_SEARCH_PATHS = (
@@ -233,6 +237,10 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/addtional-libs/pvrtex/Library/Frameworks\"",
+				);
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
