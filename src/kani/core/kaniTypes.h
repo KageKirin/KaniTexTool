@@ -1,3 +1,12 @@
+//
+//  kaniTypes.h
+//  KaniTexTool
+//
+//  Created by Christian Helmich on 09.05.11.
+//  Copyright 2011 KageKirin. All rights reserved.
+//
+
+
 #pragma once
 #ifndef KANI_TYPES_H
 #define KANI_TYPES_H 1

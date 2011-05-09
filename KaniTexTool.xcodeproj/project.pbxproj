@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		83C0A51313772C78006ED394 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83C0A51213772C78006ED394 /* main.cpp */; };
-		83C0A53013789228006ED394 /* pvrtex.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83C0A52F13789228006ED394 /* pvrtex.framework */; };
+		83C0A5511378A25A006ED394 /* pvrtex.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83C0A5501378A25A006ED394 /* pvrtex.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -32,7 +32,9 @@
 		83C0A52013772F33006ED394 /* kaniPNG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kaniPNG.h; path = src/kani/file/kaniPNG.h; sourceTree = "<group>"; };
 		83C0A52113772F33006ED394 /* kaniPVR.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kaniPVR.h; path = src/kani/file/kaniPVR.h; sourceTree = "<group>"; };
 		83C0A52513772F7B006ED394 /* kaniTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kaniTypes.h; path = src/kani/core/kaniTypes.h; sourceTree = "<group>"; };
-		83C0A52F13789228006ED394 /* pvrtex.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = pvrtex.framework; path = "addtional-libs/pvrtex/Library/Frameworks/pvrtex.framework"; sourceTree = "<group>"; };
+		83C0A54D13789ADF006ED394 /* kaniUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kaniUtils.h; path = src/kani/core/kaniUtils.h; sourceTree = "<group>"; };
+		83C0A54F13789E03006ED394 /* kaniFileTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kaniFileTypes.h; path = src/kani/file/kaniFileTypes.h; sourceTree = "<group>"; };
+		83C0A5501378A25A006ED394 /* pvrtex.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = pvrtex.framework; path = "addtional-libs/Library/Frameworks/pvrtex.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,7 +42,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				83C0A53013789228006ED394 /* pvrtex.framework in Frameworks */,
+				83C0A5511378A25A006ED394 /* pvrtex.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -85,7 +87,7 @@
 		83C0A51013772C5C006ED394 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				83C0A52F13789228006ED394 /* pvrtex.framework */,
+				83C0A5501378A25A006ED394 /* pvrtex.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -107,6 +109,7 @@
 				83C0A51F13772F33006ED394 /* kaniKTX.h */,
 				83C0A52013772F33006ED394 /* kaniPNG.h */,
 				83C0A52113772F33006ED394 /* kaniPVR.h */,
+				83C0A54F13789E03006ED394 /* kaniFileTypes.h */,
 			);
 			name = file;
 			sourceTree = "<group>";
@@ -122,6 +125,7 @@
 			isa = PBXGroup;
 			children = (
 				83C0A52513772F7B006ED394 /* kaniTypes.h */,
+				83C0A54D13789ADF006ED394 /* kaniUtils.h */,
 			);
 			name = core;
 			sourceTree = "<group>";
@@ -220,6 +224,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/addtional-libs/pvrtex/Library/Frameworks\"",
+					"\"$(SRCROOT)/addtional-libs/Library/Frameworks\"",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
@@ -240,6 +245,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/addtional-libs/pvrtex/Library/Frameworks\"",
+					"\"$(SRCROOT)/addtional-libs/Library/Frameworks\"",
 				);
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				LIBRARY_SEARCH_PATHS = (
