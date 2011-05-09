@@ -1,2 +1,8 @@
 #global ignores
 .DS_Store
+
+#Xcode resources
+*.xcworkspace
+xcuserdata
+*.xcuserdatad
+*.xcuserstate
