@@ -25,8 +25,8 @@ namespace kani
 	typedef	signed	 long	int64;
 	typedef	unsigned long	uint64;
 	
-	typedef	signed	 float	float32;
-	typedef	signed	 double	float64;
+	typedef	float			float32;
+	typedef	double			float64;
 }
 
 #endif	//KANI_TYPES_H
