@@ -17,10 +17,10 @@ namespace kani { namespace filetypes {
 	enum FileTypes
 	{
 		FileUnknown = -1,
-		FileDDS = static_swap<uint32>::swap<uint32('DDS\0')>::value,
-		FileKTX = static_swap<uint32>::swap<uint32('KTX\0')>::value,
-		FilePVR = static_swap<uint32>::swap<uint32('PVR\0')>::value,
-		FilePNG = static_swap<uint32>::swap<uint32('PNG\0')>::value,
+		FileDDS = endian::static_swap<uint32>::swap<uint32('DDS\0')>::value,
+		FileKTX = endian::static_swap<uint32>::swap<uint32('KTX\0')>::value,
+		FilePVR = endian::static_swap<uint32>::swap<uint32('PVR\0')>::value,
+		FilePNG = endian::static_swap<uint32>::swap<uint32('PNG\0')>::value,
 	};
 	
 }}
