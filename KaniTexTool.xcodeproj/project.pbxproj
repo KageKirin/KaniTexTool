@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		83478BD7137ECF8F00A11073 /* kaniCmdLine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83478BD5137ECF8F00A11073 /* kaniCmdLine.cpp */; };
+		83478BD9137FFDF000A11073 /* libboost_program_options.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 83478BD8137FFDF000A11073 /* libboost_program_options.dylib */; };
+		83478BDC13802D2900A11073 /* kaniConversion.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83478BDA13802D2900A11073 /* kaniConversion.cpp */; };
+		83478BDF13802DFD00A11073 /* kaniTexFormat.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83478BDD13802DFD00A11073 /* kaniTexFormat.cpp */; };
 		83C0A51313772C78006ED394 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83C0A51213772C78006ED394 /* main.cpp */; };
 		83C0A5511378A25A006ED394 /* pvrtex.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83C0A5501378A25A006ED394 /* pvrtex.framework */; };
 /* End PBXBuildFile section */
@@ -24,6 +28,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		83478BD5137ECF8F00A11073 /* kaniCmdLine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = kaniCmdLine.cpp; path = ../../../../../Users/chris/Documents/Coding/KaniTexTool/src/kani/core/kaniCmdLine.cpp; sourceTree = "<group>"; };
+		83478BD6137ECF8F00A11073 /* kaniCmdLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kaniCmdLine.h; path = ../../../../../Users/chris/Documents/Coding/KaniTexTool/src/kani/core/kaniCmdLine.h; sourceTree = "<group>"; };
+		83478BD8137FFDF000A11073 /* libboost_program_options.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libboost_program_options.dylib; path = ../../../../../opt/local/lib/libboost_program_options.dylib; sourceTree = "<group>"; };
+		83478BDA13802D2900A11073 /* kaniConversion.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = kaniConversion.cpp; path = ../../../../../Users/chris/Documents/Coding/KaniTexTool/src/kani/kaniConversion.cpp; sourceTree = "<group>"; };
+		83478BDB13802D2900A11073 /* kaniConversion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kaniConversion.h; path = ../../../../../Users/chris/Documents/Coding/KaniTexTool/src/kani/kaniConversion.h; sourceTree = "<group>"; };
+		83478BDD13802DFD00A11073 /* kaniTexFormat.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = kaniTexFormat.cpp; path = ../../../../../Users/chris/Documents/Coding/KaniTexTool/src/kani/texture/kaniTexFormat.cpp; sourceTree = "<group>"; };
+		83478BDE13802DFD00A11073 /* kaniTexFormat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kaniTexFormat.h; path = ../../../../../Users/chris/Documents/Coding/KaniTexTool/src/kani/texture/kaniTexFormat.h; sourceTree = "<group>"; };
 		83724B0F13772BA500391D7B /* KaniTexTool */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = KaniTexTool; sourceTree = BUILT_PRODUCTS_DIR; };
 		83C0A51113772C78006ED394 /* KaniTexTool.1 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.man; name = KaniTexTool.1; path = src/KaniTexTool.1; sourceTree = "<group>"; };
 		83C0A51213772C78006ED394 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = src/main.cpp; sourceTree = "<group>"; };
@@ -32,7 +43,7 @@
 		83C0A52013772F33006ED394 /* kaniPNG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kaniPNG.h; path = src/kani/file/kaniPNG.h; sourceTree = "<group>"; };
 		83C0A52113772F33006ED394 /* kaniPVR.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kaniPVR.h; path = src/kani/file/kaniPVR.h; sourceTree = "<group>"; };
 		83C0A52513772F7B006ED394 /* kaniTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kaniTypes.h; path = src/kani/core/kaniTypes.h; sourceTree = "<group>"; };
-		83C0A54D13789ADF006ED394 /* kaniUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kaniUtils.h; path = src/kani/core/kaniUtils.h; sourceTree = "<group>"; };
+		83C0A54D13789ADF006ED394 /* kaniEndian.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kaniEndian.h; path = src/kani/core/kaniEndian.h; sourceTree = "<group>"; };
 		83C0A54F13789E03006ED394 /* kaniFileTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kaniFileTypes.h; path = src/kani/file/kaniFileTypes.h; sourceTree = "<group>"; };
 		83C0A5501378A25A006ED394 /* pvrtex.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = pvrtex.framework; path = "addtional-libs/Library/Frameworks/pvrtex.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -43,6 +54,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				83C0A5511378A25A006ED394 /* pvrtex.framework in Frameworks */,
+				83478BD9137FFDF000A11073 /* libboost_program_options.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -80,6 +92,7 @@
 		83C0A50F13772C48006ED394 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				83478BD8137FFDF000A11073 /* libboost_program_options.dylib */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -95,6 +108,8 @@
 		83C0A52213772F3D006ED394 /* kani */ = {
 			isa = PBXGroup;
 			children = (
+				83478BDA13802D2900A11073 /* kaniConversion.cpp */,
+				83478BDB13802D2900A11073 /* kaniConversion.h */,
 				83C0A52613772F7F006ED394 /* core */,
 				83C0A52413772F5C006ED394 /* texture */,
 				83C0A52313772F48006ED394 /* file */,
@@ -117,6 +132,8 @@
 		83C0A52413772F5C006ED394 /* texture */ = {
 			isa = PBXGroup;
 			children = (
+				83478BDD13802DFD00A11073 /* kaniTexFormat.cpp */,
+				83478BDE13802DFD00A11073 /* kaniTexFormat.h */,
 			);
 			name = texture;
 			sourceTree = "<group>";
@@ -125,7 +142,9 @@
 			isa = PBXGroup;
 			children = (
 				83C0A52513772F7B006ED394 /* kaniTypes.h */,
-				83C0A54D13789ADF006ED394 /* kaniUtils.h */,
+				83C0A54D13789ADF006ED394 /* kaniEndian.h */,
+				83478BD5137ECF8F00A11073 /* kaniCmdLine.cpp */,
+				83478BD6137ECF8F00A11073 /* kaniCmdLine.h */,
 			);
 			name = core;
 			sourceTree = "<group>";
@@ -178,6 +197,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				83C0A51313772C78006ED394 /* main.cpp in Sources */,
+				83478BD7137ECF8F00A11073 /* kaniCmdLine.cpp in Sources */,
+				83478BDC13802D2900A11073 /* kaniConversion.cpp in Sources */,
+				83478BDF13802DFD00A11073 /* kaniTexFormat.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -196,6 +218,7 @@
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/addtional-libs/boost";
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
@@ -211,6 +234,7 @@
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/addtional-libs/boost";
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				SDKROOT = macosx;
 			};
@@ -231,6 +255,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/addtional-libs/pvrtex/lib/MacOS_x86\"",
+					/opt/local/lib,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -251,6 +276,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/addtional-libs/pvrtex/lib/MacOS_x86\"",
+					/opt/local/lib,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
