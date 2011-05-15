@@ -58,6 +58,7 @@ namespace kani { namespace cmd {
 			("mipmaps,m", bpo::value<int>(), "set output mipmap count. 0 for no mipmaps")
 			("no-gen-mipmaps", bpo::value<int>()->implicit_value(1), "do not generate mipmaps")
 			("regen-mipmaps", bpo::value<int>()->implicit_value(1), "re-generate mipmaps. i.e. do not use mips from input texture")
+			("converter,c", bpo::value<string>()->default_value("pvr"), "set converter")
 			//TODO: expand here
 		
 			//finally
@@ -77,6 +78,18 @@ namespace kani { namespace cmd {
 		else
 		{
 			std::cout << "no format set. transcoding only.\n";
+		}
+		
+		if(vm.count("converter"))
+		{
+			std::cout << "converter set to " 
+				<< vm["converter"].as<string>() << ".\n";
+			m_converter = vm["converter"].as<string>();
+		}
+		else
+		{
+			std::cout << "no converter set. defaulting to pvr.\n";
+			m_converter = "pvr";
 		}
 	
 		if(vm.count("mipmaps"))
@@ -114,7 +127,7 @@ namespace kani { namespace cmd {
 		}
 		else
 		{
-			m_outputFile = m_inputFile;	//_out
+			m_outputFile = m_inputFile;
 			m_outputFile.insert(m_outputFile.find_last_of('.'), "_out");
 		}
 	

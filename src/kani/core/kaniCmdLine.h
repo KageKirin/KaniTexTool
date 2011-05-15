@@ -28,6 +28,7 @@ namespace kani { namespace cmd {
 	private:
 		int		m_state;
 		string	m_format;	//TODO: replace by internal enum later
+		string	m_converter;
 		string	m_inputFile;
 		string	m_outputFile;
 		int		m_mipmaps;
