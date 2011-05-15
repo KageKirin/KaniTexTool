@@ -1,3 +1,11 @@
+//
+//  kaniDDS.h
+//  KaniTexTool
+//
+//  Created by Christian Helmich on 10.05.11.
+//  Copyright 2011 KageKirin. All rights reserved.
+//
+
 #pragma once
 #ifndef KANI_DDS_H
 #define KANI_DDS_H 1
@@ -73,4 +81,4 @@ namespace kani { namespace dds {
 }}
 
 
-#endif	//KANI_DDS_HÇ
+#endif	//KANI_DDS_H
