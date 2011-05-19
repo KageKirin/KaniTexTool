@@ -1,5 +1,5 @@
 //
-//  kaniKTX.h
+//  kaniFileHandlerPNG.h
 //  KaniTexTool
 //
 //  Created by Christian Helmich on 10.05.11.
@@ -7,12 +7,12 @@
 //
 
 #pragma once
-#ifndef KANI_KTX_H
-#define KANI_KTX_H 1
+#ifndef KANI_PNG_H
+#define KANI_PNG_H 1
 
-namespace kani { namespace ktx {
+namespace kani { namespace png {
 	
 	
 }}
 
-#endif	//KANI_KTX_H
+#endif	//KANI_PNG_H

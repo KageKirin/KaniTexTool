@@ -1,5 +1,5 @@
 //
-//  kaniPVR.h
+//  kaniFileHandlerPVR.h
 //  KaniTexTool
 //
 //  Created by Christian Helmich on 10.05.11.

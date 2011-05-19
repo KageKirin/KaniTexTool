@@ -1,18 +1,16 @@
 //
-//  kaniPNG.h
+//  kaniFileHandlerKTX.cpp
 //  KaniTexTool
 //
 //  Created by Christian Helmich on 10.05.11.
 //  Copyright 2011 KageKirin. All rights reserved.
 //
 
-#pragma once
-#ifndef KANI_PNG_H
-#define KANI_PNG_H 1
+#include "kaniFileHandlerKTX.h"
 
-namespace kani { namespace png {
+
+namespace kani { namespace ktx {
 	
 	
 }}
 
-#endif	//KANI_PNG_H

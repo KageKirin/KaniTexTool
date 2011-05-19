@@ -14,7 +14,7 @@
 #include <string>
 #include <algorithm>
 
-namespace kani { namespace filetypes {
+namespace kani { namespace file {
 	
 	using std::string;
 	using std::transform;
@@ -28,22 +28,38 @@ namespace kani { namespace filetypes {
 		FileType_PNG = endian::static_swap<uint32>::swap<uint32('PNG\0')>::value,
 	};
 	
-	FileType	getFileTypeFromFilename(const string& filename)
+	//TODO: move to cpp
+	//TODO: C++11 use && to return fileExt
+	string		getFileExtFromFilename(const string& filename)
 	{
-		string filetype = filename.substr(filename.find_last_of('.')+1);
-		transform(filetype.begin(), filetype.end(),
-				   filetype.begin(), tolower);
+		string fileExt = filename.substr(filename.find_last_of('.')+1);
+		transform(fileExt.begin(), fileExt.end(),
+				   fileExt.begin(), tolower);
+		return fileExt;
+	}
 	
-		if(filetype == "dds")
+	FileType	getFileTypeForExt(const string& fileExt)
+	{
+		//TODO: use map instead
+		if(fileExt == "dds")
 			return FileType_DDS;
-		if(filetype == "ktx")
+		if(fileExt == "ktx")
 			return FileType_KTX;
-		if(filetype == "pvr")
+		if(fileExt == "pvr")
 			return FileType_PVR;
-		if(filetype == "png")
+		if(fileExt == "png")
 			return FileType_PNG;
 		return FileType_Unknown;
 	}
+	
+	
+	FileType	getFileTypeFromFilename(const string& filename)
+	{
+		string fileExt = getFileExtFromFilename(filename);
+		return getFileTypeForExt(fileExt);
+	}
+	
+	
 }}
 
 #endif	//KANI_FILE_TYPES_H

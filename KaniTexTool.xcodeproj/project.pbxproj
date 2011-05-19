@@ -7,10 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8310CDB313832C710080A2B2 /* kaniFileHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8310CDB113832C710080A2B2 /* kaniFileHandler.cpp */; };
 		83478BD7137ECF8F00A11073 /* kaniCmdLine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83478BD5137ECF8F00A11073 /* kaniCmdLine.cpp */; };
 		83478BD9137FFDF000A11073 /* libboost_program_options.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 83478BD8137FFDF000A11073 /* libboost_program_options.dylib */; };
 		83478BDC13802D2900A11073 /* kaniConversion.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83478BDA13802D2900A11073 /* kaniConversion.cpp */; };
 		83478BDF13802DFD00A11073 /* kaniTexFormat.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83478BDD13802DFD00A11073 /* kaniTexFormat.cpp */; };
+		83BC45D6138560E900E4FAEC /* kaniFileHandlerDDS.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83BC45CE138560E800E4FAEC /* kaniFileHandlerDDS.cpp */; };
+		83BC45D7138560E900E4FAEC /* kaniFileHandlerKTX.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83BC45D0138560E800E4FAEC /* kaniFileHandlerKTX.cpp */; };
+		83BC45D8138560E900E4FAEC /* kaniFileHandlerPNG.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83BC45D2138560E800E4FAEC /* kaniFileHandlerPNG.cpp */; };
+		83BC45D9138560E900E4FAEC /* kaniFileHandlerPVR.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83BC45D4138560E800E4FAEC /* kaniFileHandlerPVR.cpp */; };
 		83C0A51313772C78006ED394 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83C0A51213772C78006ED394 /* main.cpp */; };
 		83C0A5511378A25A006ED394 /* pvrtex.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83C0A5501378A25A006ED394 /* pvrtex.framework */; };
 /* End PBXBuildFile section */
@@ -28,6 +33,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		8310CDB113832C710080A2B2 /* kaniFileHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = kaniFileHandler.cpp; path = ../../../../../Users/chris/Documents/Coding/KaniTexTool/src/kani/file/kaniFileHandler.cpp; sourceTree = "<group>"; };
+		8310CDB213832C710080A2B2 /* kaniFileHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kaniFileHandler.h; path = ../../../../../Users/chris/Documents/Coding/KaniTexTool/src/kani/file/kaniFileHandler.h; sourceTree = "<group>"; };
 		83478BD5137ECF8F00A11073 /* kaniCmdLine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = kaniCmdLine.cpp; path = ../../../../../Users/chris/Documents/Coding/KaniTexTool/src/kani/core/kaniCmdLine.cpp; sourceTree = "<group>"; };
 		83478BD6137ECF8F00A11073 /* kaniCmdLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kaniCmdLine.h; path = ../../../../../Users/chris/Documents/Coding/KaniTexTool/src/kani/core/kaniCmdLine.h; sourceTree = "<group>"; };
 		83478BD8137FFDF000A11073 /* libboost_program_options.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libboost_program_options.dylib; path = ../../../../../opt/local/lib/libboost_program_options.dylib; sourceTree = "<group>"; };
@@ -36,12 +43,16 @@
 		83478BDD13802DFD00A11073 /* kaniTexFormat.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = kaniTexFormat.cpp; path = ../../../../../Users/chris/Documents/Coding/KaniTexTool/src/kani/texture/kaniTexFormat.cpp; sourceTree = "<group>"; };
 		83478BDE13802DFD00A11073 /* kaniTexFormat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kaniTexFormat.h; path = ../../../../../Users/chris/Documents/Coding/KaniTexTool/src/kani/texture/kaniTexFormat.h; sourceTree = "<group>"; };
 		83724B0F13772BA500391D7B /* KaniTexTool */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = KaniTexTool; sourceTree = BUILT_PRODUCTS_DIR; };
+		83BC45CE138560E800E4FAEC /* kaniFileHandlerDDS.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = kaniFileHandlerDDS.cpp; path = src/kani/file/kaniFileHandlerDDS.cpp; sourceTree = "<group>"; };
+		83BC45CF138560E800E4FAEC /* kaniFileHandlerDDS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kaniFileHandlerDDS.h; path = src/kani/file/kaniFileHandlerDDS.h; sourceTree = "<group>"; };
+		83BC45D0138560E800E4FAEC /* kaniFileHandlerKTX.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = kaniFileHandlerKTX.cpp; path = src/kani/file/kaniFileHandlerKTX.cpp; sourceTree = "<group>"; };
+		83BC45D1138560E800E4FAEC /* kaniFileHandlerKTX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kaniFileHandlerKTX.h; path = src/kani/file/kaniFileHandlerKTX.h; sourceTree = "<group>"; };
+		83BC45D2138560E800E4FAEC /* kaniFileHandlerPNG.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = kaniFileHandlerPNG.cpp; path = src/kani/file/kaniFileHandlerPNG.cpp; sourceTree = "<group>"; };
+		83BC45D3138560E800E4FAEC /* kaniFileHandlerPNG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kaniFileHandlerPNG.h; path = src/kani/file/kaniFileHandlerPNG.h; sourceTree = "<group>"; };
+		83BC45D4138560E800E4FAEC /* kaniFileHandlerPVR.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = kaniFileHandlerPVR.cpp; path = src/kani/file/kaniFileHandlerPVR.cpp; sourceTree = "<group>"; };
+		83BC45D5138560E900E4FAEC /* kaniFileHandlerPVR.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kaniFileHandlerPVR.h; path = src/kani/file/kaniFileHandlerPVR.h; sourceTree = "<group>"; };
 		83C0A51113772C78006ED394 /* KaniTexTool.1 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.man; name = KaniTexTool.1; path = src/KaniTexTool.1; sourceTree = "<group>"; };
 		83C0A51213772C78006ED394 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = src/main.cpp; sourceTree = "<group>"; };
-		83C0A51E13772F33006ED394 /* kaniDDS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kaniDDS.h; path = src/kani/file/kaniDDS.h; sourceTree = "<group>"; };
-		83C0A51F13772F33006ED394 /* kaniKTX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kaniKTX.h; path = src/kani/file/kaniKTX.h; sourceTree = "<group>"; };
-		83C0A52013772F33006ED394 /* kaniPNG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kaniPNG.h; path = src/kani/file/kaniPNG.h; sourceTree = "<group>"; };
-		83C0A52113772F33006ED394 /* kaniPVR.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kaniPVR.h; path = src/kani/file/kaniPVR.h; sourceTree = "<group>"; };
 		83C0A52513772F7B006ED394 /* kaniTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kaniTypes.h; path = src/kani/core/kaniTypes.h; sourceTree = "<group>"; };
 		83C0A54D13789ADF006ED394 /* kaniEndian.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kaniEndian.h; path = src/kani/core/kaniEndian.h; sourceTree = "<group>"; };
 		83C0A54F13789E03006ED394 /* kaniFileTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kaniFileTypes.h; path = src/kani/file/kaniFileTypes.h; sourceTree = "<group>"; };
@@ -120,11 +131,17 @@
 		83C0A52313772F48006ED394 /* file */ = {
 			isa = PBXGroup;
 			children = (
-				83C0A51E13772F33006ED394 /* kaniDDS.h */,
-				83C0A51F13772F33006ED394 /* kaniKTX.h */,
-				83C0A52013772F33006ED394 /* kaniPNG.h */,
-				83C0A52113772F33006ED394 /* kaniPVR.h */,
 				83C0A54F13789E03006ED394 /* kaniFileTypes.h */,
+				8310CDB113832C710080A2B2 /* kaniFileHandler.cpp */,
+				8310CDB213832C710080A2B2 /* kaniFileHandler.h */,
+				83BC45CE138560E800E4FAEC /* kaniFileHandlerDDS.cpp */,
+				83BC45CF138560E800E4FAEC /* kaniFileHandlerDDS.h */,
+				83BC45D0138560E800E4FAEC /* kaniFileHandlerKTX.cpp */,
+				83BC45D1138560E800E4FAEC /* kaniFileHandlerKTX.h */,
+				83BC45D2138560E800E4FAEC /* kaniFileHandlerPNG.cpp */,
+				83BC45D3138560E800E4FAEC /* kaniFileHandlerPNG.h */,
+				83BC45D4138560E800E4FAEC /* kaniFileHandlerPVR.cpp */,
+				83BC45D5138560E900E4FAEC /* kaniFileHandlerPVR.h */,
 			);
 			name = file;
 			sourceTree = "<group>";
@@ -200,6 +217,11 @@
 				83478BD7137ECF8F00A11073 /* kaniCmdLine.cpp in Sources */,
 				83478BDC13802D2900A11073 /* kaniConversion.cpp in Sources */,
 				83478BDF13802DFD00A11073 /* kaniTexFormat.cpp in Sources */,
+				8310CDB313832C710080A2B2 /* kaniFileHandler.cpp in Sources */,
+				83BC45D6138560E900E4FAEC /* kaniFileHandlerDDS.cpp in Sources */,
+				83BC45D7138560E900E4FAEC /* kaniFileHandlerKTX.cpp in Sources */,
+				83BC45D8138560E900E4FAEC /* kaniFileHandlerPNG.cpp in Sources */,
+				83BC45D9138560E900E4FAEC /* kaniFileHandlerPVR.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
