@@ -7,13 +7,21 @@
 //
 
 #pragma once
-#ifndef KANI_CONERTER_PVR_H
-#define KANI_CONERTER_PVR_H	1
+#ifndef KANI_CONVERTER_PVR_H
+#define KANI_CONVERTER_PVR_H	1
+
+#include "kaniConverter.h"
 
 namespace kani { namespace converter {
 
-	class ConverterPVR
+	class ConverterPVR : public Converter
 	{
+	protected:
+		virtual bool internal_convert(const string&	inputFilename,
+							 const string&	outputFilename,
+							 const string&	format,
+							 int			mipmaps,
+							 bool			regenMips) const;
 	};
 
 }}
