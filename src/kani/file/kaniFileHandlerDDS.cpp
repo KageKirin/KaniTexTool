@@ -6,9 +6,7 @@
 //  Copyright 2011 KageKirin. All rights reserved.
 //
 
-#pragma once
-#ifndef KANI_DDS_H
-#define KANI_DDS_H 1
+#include "kaniFileHandlerDDS.h"
 
 #include "../core/kaniTypes.h"
 
@@ -48,7 +46,20 @@
 //--------------------------------------------
 // DDS file format structures.
 
-namespace kani { namespace dds {
+namespace kani { namespace file {
+
+
+	template<>
+	int FileHandlerImpl<FileType_DDS>::internal_read(const string& filename, CPVRTextureHeader&, CPVRTextureData&) const
+	{
+		return -5;
+	}
+	
+	template<>
+	int FileHandlerImpl<FileType_DDS>::internal_write(const string& filename, const CPVRTextureHeader&, const CPVRTextureData&) const
+	{
+		return -5;
+	}
 
 	struct DDS_Pixelformat
 	{
@@ -81,4 +92,3 @@ namespace kani { namespace dds {
 }}
 
 
-#endif	//KANI_DDS_H
