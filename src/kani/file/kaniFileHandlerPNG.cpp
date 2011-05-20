@@ -8,7 +8,19 @@
 
 #include "kaniFileHandlerPNG.h"
 
-namespace kani { namespace png {
+namespace kani { namespace file {
 	
+	template<>
+	int FileHandlerImpl<FileType_PNG>::internal_read(const string& filename, CPVRTextureHeader&, CPVRTextureData&) const
+	{
+		return -3;
+	}
+	
+	template<>
+	int FileHandlerImpl<FileType_PNG>::internal_write(const string& filename, const CPVRTextureHeader&, const CPVRTextureData&) const
+	{
+		return -3;
+	}
+
 	
 }}

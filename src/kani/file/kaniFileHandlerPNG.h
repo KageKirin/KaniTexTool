@@ -7,12 +7,22 @@
 //
 
 #pragma once
-#ifndef KANI_PNG_H
-#define KANI_PNG_H 1
+#ifndef KANI_FILE_HANDLER_PNG_H
+#define KANI_FILE_HANDLER_PNG_H 1
 
-namespace kani { namespace png {
+#include "kaniFileTypes.h"
+#include "kaniFileHandlerImpl.h"
+
+
+namespace kani { namespace file {
 	
+	template<>
+	int FileHandlerImpl<FileType_PNG>::internal_read(const string& filename, CPVRTextureHeader&, CPVRTextureData&) const;
+	
+	template<>
+	int FileHandlerImpl<FileType_PNG>::internal_write(const string& filename, const CPVRTextureHeader&, const CPVRTextureData&) const;
+
 	
 }}
 
-#endif	//KANI_PNG_H
+#endif	//KANI_FILE_HANDLER_PNG_H
