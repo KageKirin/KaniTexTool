@@ -12,7 +12,7 @@
 #include "kaniFileTypes.h"
 #include <string>
 
-namespace pvrtex
+namespace pvrtexlib
 {
 	class CPVRTextureHeader;
 	class CPVRTextureData;
@@ -20,8 +20,8 @@ namespace pvrtex
 
 namespace kani { namespace file {
 
-	using pvrtex::CPVRTextureHeader;
-	using pvrtex::CPVRTextureData;
+	using pvrtexlib::CPVRTextureHeader;
+	using pvrtexlib::CPVRTextureData;
 	
 	using std::string;
 	
@@ -39,9 +39,7 @@ namespace kani { namespace file {
 		static FileHandler& getFileHandlerForType(FileType filetype);
 		virtual int internal_read(const string& filename, CPVRTextureHeader&, CPVRTextureData&) const;
 		virtual int internal_write(const string& filename, const CPVRTextureHeader&, const CPVRTextureData&) const;
-	};
-	
-	
+	};	
 	
 }}
 
