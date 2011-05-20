@@ -6,6 +6,7 @@
 //  Copyright 2011 KageKirin. All rights reserved.
 //
 
+#pragma once
 #ifndef KANI_CMDLINE_H
 #define KANI_CMDLINE_H	1
 

@@ -6,6 +6,7 @@
 //  Copyright 2011 KageKirin. All rights reserved.
 //
 
+#pragma once
 #ifndef KANI_FILE_HANDLER_H
 #define KANI_FILE_HANDLER_H 1
 
