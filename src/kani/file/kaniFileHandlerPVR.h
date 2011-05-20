@@ -7,14 +7,20 @@
 //
 
 #pragma once
-#ifndef KANI_PVR_H
-#define KANI_PVR_H 1
+#ifndef KANI_FILE_HANDLER_PVR_H
+#define KANI_FILE_HANDLER_PVR_H 1
 
-namespace kani { namespace pvr {
+#include "kaniFileTypes.h"
+#include "kaniFileHandlerImpl.h"
+
+namespace kani { namespace file {
 	
-	typedef pvrtexlib::CPVRTextureHeader	PVR_Header;
-	typedef pvrtexlib::CPVRTextureData		PVR_Data;
+	template<>
+	int FileHandlerImpl<FileType_PVR>::internal_read(const string& filename, CPVRTextureHeader&, CPVRTextureData&) const;
 	
+	template<>
+	int FileHandlerImpl<FileType_PVR>::internal_write(const string& filename, const CPVRTextureHeader&, const CPVRTextureData&) const;
+
 }}
 
-#endif	//KANI_PVR_H
+#endif	//KANI_FILE_HANDLER_PVR_H
