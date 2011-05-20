@@ -39,12 +39,13 @@ namespace kani { namespace cmd {
 	public:
 		CmdLineOptions(int argc, const char** argv);
 		
-		int getState();
-		const string& getInputFile();
-		const string& getOutputFile();
-		int getMipmaps();
-		bool getRegenMips();
-		const string& getFormat();	//TODO: enum
+		int getState() const;
+		const string& getInputFile() const;
+		const string& getOutputFile() const;
+		int getMipmaps() const;
+		bool getRegenMips() const;
+		const string& getFormat() const;	//TODO: enum
+		const string& getConverter() const;
 	
 	private:
 		int parse(int argc, const char** argv);

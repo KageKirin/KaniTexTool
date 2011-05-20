@@ -7,11 +7,14 @@
 //
 
 #include "kaniCmdLine.h"
+#include "../texture/kaniTexFormat.h"
+
 #include <vector>
 #include <string>
 #include <stdexcept>
 #include <boost/program_options.hpp>
-
+#include <boost/preprocessor/seq/elem.hpp>
+#include <boost/preprocessor/stringize.hpp>
 
 namespace kani { namespace cmd {
 
@@ -47,14 +50,23 @@ namespace kani { namespace cmd {
 			return 1;
 		}
 		return mapVariables(vm);	
-	}	
+	}
+	
+	
+#define M_CREATEDEF(r, data, elem)	\
+	BOOST_PP_STRINGIZE(elem) " "
+
+#define FIRST_ELEM		BOOST_PP_SEQ_ELEM(0, FORMAT_SEQ)
+#define FIRST_ELEM_S	BOOST_PP_STRINGIZE(FIRST_ELEM)
 		
 	void CmdLineOptions::buildDescription(bpo::options_description& desc)
 	{
 		//NOTE: what kind of DSL (domain-specific language) is this?
 		desc.add_options()
 			("help,h", "print this message")
-			("format,f", bpo::value<string>(), "set output format")
+			("format,f", bpo::value<string>()->default_value(FIRST_ELEM_S), "set output format as one of the following: "
+				BOOST_PP_SEQ_FOR_EACH(M_CREATEDEF, 0, FORMAT_SEQ)
+			)
 			("mipmaps,m", bpo::value<int>(), "set output mipmap count. 0 for no mipmaps")
 			("no-gen-mipmaps", bpo::value<int>()->implicit_value(1), "do not generate mipmaps")
 			("regen-mipmaps", bpo::value<int>()->implicit_value(1), "re-generate mipmaps. i.e. do not use mips from input texture")
@@ -138,34 +150,39 @@ namespace kani { namespace cmd {
 	
 	//----------------------------------------------------------------------
 	
-	int CmdLineOptions::getState()
+	int CmdLineOptions::getState() const
 	{
 		return m_state;
 	}
 	
-	const string& CmdLineOptions::getInputFile()
+	const string& CmdLineOptions::getInputFile() const
 	{
 		return m_inputFile;
 	}
 	
-	const string& CmdLineOptions::getOutputFile()
+	const string& CmdLineOptions::getOutputFile() const
 	{
 		return m_outputFile;
 	}
 	
-	int CmdLineOptions::getMipmaps()
+	int CmdLineOptions::getMipmaps() const
 	{
 		return m_mipmaps;
 	}
 	
-	bool CmdLineOptions::getRegenMips()
+	bool CmdLineOptions::getRegenMips() const
 	{
 		return m_regenMips;
 	}
 	
-	const string& CmdLineOptions::getFormat()
+	const string& CmdLineOptions::getFormat() const
 	{
 		return m_format;	
+	}
+
+	const string& CmdLineOptions::getConverter() const
+	{
+		return m_converter;
 	}
 	
 	//----------------------------------------------------------------------
