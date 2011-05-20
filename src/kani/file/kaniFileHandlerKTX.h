@@ -7,12 +7,20 @@
 //
 
 #pragma once
-#ifndef KANI_KTX_H
-#define KANI_KTX_H 1
+#ifndef KANI_FILE_HANDLER_KTX_H
+#define KANI_FILE_HANDLER_KTX_H 1
 
-namespace kani { namespace ktx {
+#include "kaniFileTypes.h"
+#include "kaniFileHandlerImpl.h"
+
+namespace kani { namespace file {
 	
+	template<>
+	int FileHandlerImpl<FileType_KTX>::internal_read(const string& filename, CPVRTextureHeader&, CPVRTextureData&) const;
+	
+	template<>
+	int FileHandlerImpl<FileType_KTX>::internal_write(const string& filename, const CPVRTextureHeader&, const CPVRTextureData&) const;
 	
 }}
 
-#endif	//KANI_KTX_H
+#endif	//KANI_FILE_HANDLER_KTX_H
