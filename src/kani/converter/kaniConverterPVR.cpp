@@ -57,7 +57,9 @@ namespace kani { namespace converter {
 
 		int outputDataSize = 0;
 		PixelType pt = kani::texture::getSupportedPixelType(format.c_str());
-		if((int)pt < 0)
+		
+		//check if any conversion needed
+		if((int)pt < 0 && texHeader_Orig.getMipMapCount() == mipmaps && !regenMips)
 		{
 			outputDataSize = FileHandler::write(outputFilename, texHeader_Orig, texData_Orig);
 		}
@@ -68,15 +70,28 @@ namespace kani { namespace converter {
 			pvrtexlib::CPVRTextureHeader	texHeader_Dec(texHeader_Orig);
 			texHeader_Dec.setPixelType(pvrtexlib::MGLPT_ARGB_8888);
 			pvrtexlib::CPVRTextureData		texData_Dec;
-			
 			sPVRU.DecompressPVR(texHeader_Orig, texData_Orig,texHeader_Dec, texData_Dec);
+			
+		
+			//process
+			if(regenMips && mipmaps < 0)
+			{
+				mipmaps = texHeader_Orig.getMipMapCount();
+			}
+			if(mipmaps >= 0)
+			{
+				cout << "processing" << endl;
+				pvrtexlib::CPVRTextureHeader	texHeader_Proc(texHeader_Dec);
+				texHeader_Proc.setMipMapCount(mipmaps);
+				texHeader_Proc.setFalseMips(false);
+				sPVRU.ProcessRawPVR(texHeader_Dec, texData_Dec, texHeader_Proc);
+			}
 			
 			//compression
 			cout << "compressing" << endl;
 			pvrtexlib::CPVRTextureHeader	texHeader_Out(texHeader_Orig);
 			texHeader_Out.setPixelType(pt);
 			pvrtexlib::CPVRTextureData		texData_Out;
-			
 			sPVRU.CompressPVR(texHeader_Dec, texData_Dec, texHeader_Out, texData_Out);
 			
 			
