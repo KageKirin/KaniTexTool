@@ -54,7 +54,7 @@ namespace kani { namespace cmd {
 	
 	
 #define M_CREATEDEF(r, data, elem)	\
-	BOOST_PP_STRINGIZE(elem) " "
+	BOOST_PP_STRINGIZE(BITUPLE_1ST(elem)) ", "
 
 #define FIRST_ELEM		BOOST_PP_SEQ_ELEM(0, FORMAT_SEQ)
 #define FIRST_ELEM_S	BOOST_PP_STRINGIZE(FIRST_ELEM)

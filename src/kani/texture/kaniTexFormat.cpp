@@ -32,7 +32,7 @@ namespace kani { namespace texture {
 	
 #define M_CREATEMAP(r, data, elem)	\
 	s_TexFormatTupleMap.push_back	\
-	( TexFormatTuple(BOOST_PP_STRINGIZE(elem), (PixelType)0x00, BOOST_PP_CAT(data, elem))	);
+	( TexFormatTuple(BOOST_PP_STRINGIZE(BITUPLE_1ST(elem)), (PixelType)BITUPLE_2ND(elem), BOOST_PP_CAT(data, BITUPLE_1ST(elem)))	);
 	
 	
 	typedef vector<TexFormatTuple>	TexFormatTupleMap;
@@ -40,6 +40,8 @@ namespace kani { namespace texture {
 	
 	void createTexFormatTupleMap()
 	{
+		using namespace pvrtexlib;
+	
 		static bool created = false;
 		if(created)
 			return;
