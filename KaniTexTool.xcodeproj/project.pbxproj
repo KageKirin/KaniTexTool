@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		8310CDB313832C710080A2B2 /* kaniFileHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8310CDB113832C710080A2B2 /* kaniFileHandler.cpp */; };
+		832035D01389C8C8000A9399 /* libpng.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 832035CF1389C8C8000A9399 /* libpng.framework */; };
+		832035D21389C8D7000A9399 /* squish.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 832035D11389C8D7000A9399 /* squish.framework */; };
 		83478BD7137ECF8F00A11073 /* kaniCmdLine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83478BD5137ECF8F00A11073 /* kaniCmdLine.cpp */; };
 		83478BD9137FFDF000A11073 /* libboost_program_options.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 83478BD8137FFDF000A11073 /* libboost_program_options.dylib */; };
 		83478BDC13802D2900A11073 /* kaniConversion.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83478BDA13802D2900A11073 /* kaniConversion.cpp */; };
@@ -39,6 +41,8 @@
 /* Begin PBXFileReference section */
 		8310CDB113832C710080A2B2 /* kaniFileHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = kaniFileHandler.cpp; path = ../../../../../Users/chris/Documents/Coding/KaniTexTool/src/kani/file/kaniFileHandler.cpp; sourceTree = "<group>"; };
 		8310CDB213832C710080A2B2 /* kaniFileHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kaniFileHandler.h; path = ../../../../../Users/chris/Documents/Coding/KaniTexTool/src/kani/file/kaniFileHandler.h; sourceTree = "<group>"; };
+		832035CF1389C8C8000A9399 /* libpng.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = libpng.framework; path = "../../../../../Users/chris/Documents/Coding/KaniTexTool/addtional-libs/Library/Frameworks/libpng.framework"; sourceTree = "<group>"; };
+		832035D11389C8D7000A9399 /* squish.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = squish.framework; path = "../../../../../Users/chris/Documents/Coding/KaniTexTool/addtional-libs/Library/Frameworks/squish.framework"; sourceTree = "<group>"; };
 		83478BD5137ECF8F00A11073 /* kaniCmdLine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = kaniCmdLine.cpp; path = ../../../../../Users/chris/Documents/Coding/KaniTexTool/src/kani/core/kaniCmdLine.cpp; sourceTree = "<group>"; };
 		83478BD6137ECF8F00A11073 /* kaniCmdLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kaniCmdLine.h; path = ../../../../../Users/chris/Documents/Coding/KaniTexTool/src/kani/core/kaniCmdLine.h; sourceTree = "<group>"; };
 		83478BD8137FFDF000A11073 /* libboost_program_options.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libboost_program_options.dylib; path = ../../../../../opt/local/lib/libboost_program_options.dylib; sourceTree = "<group>"; };
@@ -77,6 +81,8 @@
 			files = (
 				83C0A5511378A25A006ED394 /* pvrtex.framework in Frameworks */,
 				83478BD9137FFDF000A11073 /* libboost_program_options.dylib in Frameworks */,
+				832035D01389C8C8000A9399 /* libpng.framework in Frameworks */,
+				832035D21389C8D7000A9399 /* squish.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -133,6 +139,8 @@
 		83C0A51013772C5C006ED394 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				832035D11389C8D7000A9399 /* squish.framework */,
+				832035CF1389C8C8000A9399 /* libpng.framework */,
 				83C0A5501378A25A006ED394 /* pvrtex.framework */,
 			);
 			name = Frameworks;
@@ -301,6 +309,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/addtional-libs/pvrtex/Library/Frameworks\"",
 					"\"$(SRCROOT)/addtional-libs/Library/Frameworks\"",
+					"\"/Users/chris/Documents/Coding/KaniTexTool/addtional-libs/Library/Frameworks\"",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
@@ -323,6 +332,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/addtional-libs/pvrtex/Library/Frameworks\"",
 					"\"$(SRCROOT)/addtional-libs/Library/Frameworks\"",
+					"\"/Users/chris/Documents/Coding/KaniTexTool/addtional-libs/Library/Frameworks\"",
 				);
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				LIBRARY_SEARCH_PATHS = (
