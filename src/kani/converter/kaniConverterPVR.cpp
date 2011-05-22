@@ -38,7 +38,8 @@ namespace kani { namespace converter {
 		
 		pvrtexlib::CPVRTextureHeader	texHeader_Orig;
 		pvrtexlib::CPVRTextureData		texData_Orig;
-		
+
+		cout << "reading from " << inputFilename << endl;		
 		int inputDataSize = FileHandler::read(inputFilename, texHeader_Orig, texData_Orig);
 		cout << "read " << inputDataSize << " bytes" << endl;
 		if(inputDataSize <= 0)
@@ -62,21 +63,26 @@ namespace kani { namespace converter {
 		}
 		else
 		{
+			//decompression
+			cout << "decompressing" << endl;
 			pvrtexlib::CPVRTextureHeader	texHeader_Dec(texHeader_Orig);
 			texHeader_Dec.setPixelType(pvrtexlib::MGLPT_ARGB_8888);
 			pvrtexlib::CPVRTextureData		texData_Dec;
 			
 			sPVRU.DecompressPVR(texHeader_Orig, texData_Orig,texHeader_Dec, texData_Dec);
 			
+			//compression
+			cout << "compressing" << endl;
 			pvrtexlib::CPVRTextureHeader	texHeader_Out(texHeader_Orig);
 			texHeader_Out.setPixelType(pt);
 			pvrtexlib::CPVRTextureData		texData_Out;
 			
 			sPVRU.CompressPVR(texHeader_Dec, texData_Dec, texHeader_Out, texData_Out);
 			
-			outputDataSize = FileHandler::write(outputFilename, texHeader_Out, texData_Out);
-
 			
+			//write
+			cout << "writing to " << outputFilename << endl;
+			outputDataSize = FileHandler::write(outputFilename, texHeader_Out, texData_Out);
 		}
 		
 	
