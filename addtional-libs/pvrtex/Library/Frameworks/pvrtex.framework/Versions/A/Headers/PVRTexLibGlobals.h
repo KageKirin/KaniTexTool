@@ -242,14 +242,14 @@ const char* const  TEXTOOLVERSION_STRING = "";
 		OGL_PVRTCII4,	//Not in use
 		OGL_PVRTCII2,	//Not in use
 
-#ifdef _WIN32
+//#ifdef _WIN32
 		// S3TC Encoding
 		D3D_DXT1 = 0x20,
 		D3D_DXT2,
 		D3D_DXT3,
 		D3D_DXT4,
 		D3D_DXT5,
-#endif
+//#endif
 
 		//RGB Formats
 		D3D_RGB_332 
@@ -360,7 +360,7 @@ const char* const  TEXTOOLVERSION_STRING = "";
 		DX10_R8G8_B8G8_UNORM,		// unimplemented
 		DX10_G8R8_G8B8_UNORM,		// unimplemented
 
-#ifdef _WIN32
+//#ifdef _WIN32
 		DX10_BC1_UNORM,	
 		DX10_BC1_UNORM_SRGB,
 
@@ -375,7 +375,7 @@ const char* const  TEXTOOLVERSION_STRING = "";
 
 		DX10_BC5_UNORM,				// unimplemented
 		DX10_BC5_SNORM,				// unimplemented
-#endif
+//#endif
 		// OpenVG
 
 		/* RGB{A,X} channel ordering */
