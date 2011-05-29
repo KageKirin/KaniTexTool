@@ -14,6 +14,7 @@
 		83478BD9137FFDF000A11073 /* libboost_program_options.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 83478BD8137FFDF000A11073 /* libboost_program_options.dylib */; };
 		83478BDC13802D2900A11073 /* kaniConversion.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83478BDA13802D2900A11073 /* kaniConversion.cpp */; };
 		83478BDF13802DFD00A11073 /* kaniTexFormat.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83478BDD13802DFD00A11073 /* kaniTexFormat.cpp */; };
+		837829FE13929AE70029B412 /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 837829FD13929AE70029B412 /* libz.1.2.5.dylib */; };
 		83BC45D6138560E900E4FAEC /* kaniFileHandlerDDS.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83BC45CE138560E800E4FAEC /* kaniFileHandlerDDS.cpp */; };
 		83BC45D7138560E900E4FAEC /* kaniFileHandlerKTX.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83BC45D0138560E800E4FAEC /* kaniFileHandlerKTX.cpp */; };
 		83BC45D8138560E900E4FAEC /* kaniFileHandlerPNG.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83BC45D2138560E800E4FAEC /* kaniFileHandlerPNG.cpp */; };
@@ -51,6 +52,7 @@
 		83478BDD13802DFD00A11073 /* kaniTexFormat.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = kaniTexFormat.cpp; path = ../../../../../Users/chris/Documents/Coding/KaniTexTool/src/kani/texture/kaniTexFormat.cpp; sourceTree = "<group>"; };
 		83478BDE13802DFD00A11073 /* kaniTexFormat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kaniTexFormat.h; path = ../../../../../Users/chris/Documents/Coding/KaniTexTool/src/kani/texture/kaniTexFormat.h; sourceTree = "<group>"; };
 		83724B0F13772BA500391D7B /* KaniTexTool */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = KaniTexTool; sourceTree = BUILT_PRODUCTS_DIR; };
+		837829FD13929AE70029B412 /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = ../../../../../opt/local/lib/libz.1.2.5.dylib; sourceTree = "<group>"; };
 		83BC45CE138560E800E4FAEC /* kaniFileHandlerDDS.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = kaniFileHandlerDDS.cpp; path = src/kani/file/kaniFileHandlerDDS.cpp; sourceTree = "<group>"; };
 		83BC45CF138560E800E4FAEC /* kaniFileHandlerDDS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kaniFileHandlerDDS.h; path = src/kani/file/kaniFileHandlerDDS.h; sourceTree = "<group>"; };
 		83BC45D0138560E800E4FAEC /* kaniFileHandlerKTX.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = kaniFileHandlerKTX.cpp; path = src/kani/file/kaniFileHandlerKTX.cpp; sourceTree = "<group>"; };
@@ -83,6 +85,7 @@
 				83478BD9137FFDF000A11073 /* libboost_program_options.dylib in Frameworks */,
 				832035D01389C8C8000A9399 /* libpng.framework in Frameworks */,
 				832035D21389C8D7000A9399 /* squish.framework in Frameworks */,
+				837829FE13929AE70029B412 /* libz.1.2.5.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -131,6 +134,7 @@
 		83C0A50F13772C48006ED394 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				837829FD13929AE70029B412 /* libz.1.2.5.dylib */,
 				83478BD8137FFDF000A11073 /* libboost_program_options.dylib */,
 			);
 			name = Libraries;
