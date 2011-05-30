@@ -15,6 +15,7 @@
 #include <pvrtex/CPVRTextureData.h>
 
 #include <iostream>
+#include <vector>
 #include <cstdio>
 #include <cassert>
 
@@ -33,6 +34,7 @@ namespace kani { namespace file {
 	using std::cout;
 	using std::cerr;
 	using std::endl;
+	using std::vector;
 	
 	//------------------------------------------------------------
 	//TODO: use vector<png_byte*> rowPtrs instead of current array
@@ -76,26 +78,13 @@ namespace kani { namespace file {
 		{
 			png_destroy_read_struct(&pPngStruct, &pPngInfo, (png_infopp)NULL);
 			return -5;
-		}
-		
-
-		png_byte**	rowPtrs = NULL;
-		char*		data = NULL;
-
-		
+		}		
 		
 		//error handling
 		if(setjmp(png_jmpbuf(pPngStruct)))
 		{
 			png_destroy_read_struct(&pPngStruct, &pPngInfo, &pPngInfo_End);
 			fclose(file);
-			
-			if (rowPtrs != NULL)
-				delete [] rowPtrs;
-			
-			if (data != NULL)
-				delete [] data;
-			
 			return -6;
 		}
 		
@@ -183,33 +172,24 @@ namespace kani { namespace file {
 		pvrData = CPVRTextureData((size_t)imageSize);
 		
 		//decompression
-		rowPtrs	= new png_byte*[height];
+		vector<png_byte*>	rowPtrs(height, NULL);
 		const png_uint_32 stride = width * bitDepth * channels / 8;
-		
-		for(png_uint_32 i = 0; i < height; ++i)
-		{
-			rowPtrs[i] = NULL;
-		}
 		
 		//set row ptr to starting address
 		for(png_uint_32 i = 0; i < height; ++i)
 		{
-			png_uint_32 q = (height - i - 1) * stride;
+			png_uint_32 q = i * stride;	//(height - i - 1) * stride;
 			rowPtrs[i] = (png_byte*)pvrData.getData() + q;
 		}
 		
 		//read image into row ptrs, which is pointing to our data buffer
-		png_read_image(pPngStruct, rowPtrs);
-
-
-		delete[] rowPtrs;		
+		png_read_image(pPngStruct, (png_byte**)&rowPtrs[0]);
 		png_destroy_read_struct(&pPngStruct, &pPngInfo, &pPngInfo_End);
 
 		int readBytes = (int)ftell(file);
 		fclose(file);
 		
 		return readBytes;
-		
 	}
 	
 	template<>
@@ -235,19 +215,13 @@ namespace kani { namespace file {
 		{
 			png_destroy_write_struct(&pPngStruct, (png_info**)NULL);
 			return -5;
-		}
+		}	
 		
-		png_byte**	rowPtrs = NULL;
-
 		//error handler
 		if (setjmp(png_jmpbuf(pPngStruct)))
 		{
 			png_destroy_write_struct(&pPngStruct, &pPngInfo);
 			fclose(file);
-
-			if(rowPtrs)
-				delete [] rowPtrs;
-			
 			return -6;
 		}
 		
@@ -308,32 +282,19 @@ namespace kani { namespace file {
 		if (bitDepth > 8)
 			png_set_swap(pPngStruct);
 		
-		rowPtrs = new png_byte*[pvrHeader.getHeight()];
+		vector<png_byte*>	rowPtrs(pvrHeader.getHeight(), NULL);
 		const png_uint_32 stride = pvrHeader.getWidth() * bitDepth * channels / 8;
 
-		for(png_uint_32 i = 0; i < pvrHeader.getHeight(); ++i)
-		{
-			rowPtrs[i] = NULL;
-		}
-		
 		//set row ptr to starting address
 		for(png_uint_32 i = 0; i < pvrHeader.getHeight(); ++i)
 		{
-			png_uint_32 q = (pvrHeader.getHeight() - i - 1) * stride;
+			png_uint_32 q = i * stride;	//(pvrHeader.getHeight() - i - 1) * stride;
 			rowPtrs[i] = (png_byte*)pvrData.getData() + q;
 		}
-
-		if (bitDepth > 8)
-			png_set_swap(pPngStruct);
-		
-		rowPtrs = new png_byte*[pvrHeader.getHeight()];		
 		
 		png_write_info(pPngStruct, pPngInfo);
-		png_write_rows(pPngStruct, rowPtrs,
+		png_write_rows(pPngStruct, (png_byte**)&rowPtrs[0],
 					   pvrHeader.getHeight());
-		
-		delete [] rowPtrs;
-		
 
 		int writtenBytes = (int)ftell(file);
 		fclose(file);
