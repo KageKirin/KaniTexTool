@@ -57,6 +57,10 @@ namespace kani { namespace converter {
 
 		int outputDataSize = 0;
 		PixelType pt = kani::texture::getSupportedPixelType(format.c_str());
+		if(pt == pvrtexlib::MGLPT_NOTYPE)
+		{
+			pt = texHeader_Orig.getPixelType();
+		}
 		
 		//check if any conversion needed
 		if((int)pt < 0 && texHeader_Orig.getMipMapCount() == mipmaps && !regenMips)
