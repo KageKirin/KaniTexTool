@@ -7,7 +7,7 @@
 //
 
 #include "kaniFileHandlerPNG.h"
-#include "../texture/kaniTexFormat.h"
+#include "../texture/kaniTexPixelFormat.h"
 #include <libpng/png.h>
 
 #include <pvrtex/CPVRTexture.h>

@@ -9,7 +9,7 @@
 #include "kaniConverterPVR.h"
 #include "../file/kaniFileTypes.h"
 #include "../file/kaniFileHandler.h"
-#include "../texture/kaniTexFormat.h"
+#include "../texture/kaniTexPixelFormat.h"
 
 #include <pvrtex/PVRTexLib.h>
 #include <pvrtex/CPVRTexture.h>

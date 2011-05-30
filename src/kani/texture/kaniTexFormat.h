@@ -15,10 +15,13 @@
 #include <boost/preprocessor/cat.hpp>
 #include <boost/preprocessor/seq/for_each.hpp>
 #include <boost/preprocessor/tuple/elem.hpp>
+#include <vector>
 
 namespace kani { namespace texture {
 
 	using pvrtexlib::PixelType;
+	using std::vector;
+
 
 	//TODO: expand seq element to be tuple(string, pvrtexlib PixelType, ...)
 #define BITUPLE_SAME(x)		x, x
@@ -262,8 +265,19 @@ namespace kani { namespace texture {
 	};
 #undef M_CAT	
 
-	PixelType	getSupportedPixelType(const char* textFormat);
-	PixelType	getSupportedPixelType(int pngFormat, int bitPerChannel);
+	struct TexFormatTuple
+	{
+		const char* text;
+		PixelType	pvrtex;
+		Format		format;
+		int			pngFormat;
+		int			bitPerChannel;
+		
+		TexFormatTuple(const char* t, PixelType p, Format f, int pf, int bpc);
+	};
+	
+	typedef vector<TexFormatTuple>	TexFormatTupleMap;
+	void createTexFormatTupleMap();
 }}
 
 #endif	//KANI_TEX_FORMAT

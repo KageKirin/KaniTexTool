@@ -8,29 +8,19 @@
 
 #include "kaniTexFormat.h"
 
-#include <vector>
-#include <algorithm>
 #include <cstring>
 #include <boost/preprocessor/stringize.hpp>
 
 
 namespace kani { namespace texture {
 
-	using std::vector;
-
-	struct TexFormatTuple
+	TexFormatTuple::TexFormatTuple(const char* t, PixelType p, Format f, int pf, int bpc):
+	text(t), pvrtex(p), format(f),
+	pngFormat(pf), bitPerChannel(bpc)
 	{
-		const char* text;
-		PixelType	pvrtex;
-		Format		format;
-		int			pngFormat;
-		int			bitPerChannel;
-		
-		TexFormatTuple(const char* t, PixelType p, Format f, int pf, int bpc):
-		text(t), pvrtex(p), format(f),
-		pngFormat(pf), bitPerChannel(bpc)
-		{}
-	};
+	}
+	
+	TexFormatTupleMap s_TexFormatTupleMap;
 	
 	
 #define M_CREATEMAP(r, data, elem)	\
@@ -41,9 +31,6 @@ namespace kani { namespace texture {
 		QUADTUPLE_3RD(elem),\
 		QUADTUPLE_4TH(elem)));
 	
-	
-	typedef vector<TexFormatTuple>	TexFormatTupleMap;
-	static TexFormatTupleMap s_TexFormatTupleMap;
 	
 	void createTexFormatTupleMap()
 	{
@@ -58,71 +45,6 @@ namespace kani { namespace texture {
 		BOOST_PP_SEQ_FOR_EACH(M_CREATEMAP, Format_, FORMAT_SEQ) // Format_x		
 		
 		created = true;
-	}
-	
-	template<typename predicate>
-	const TexFormatTuple& findTuple(predicate P)
-	{
-		createTexFormatTupleMap();
-
-		TexFormatTupleMap::iterator iter = find_if(s_TexFormatTupleMap.begin(), s_TexFormatTupleMap.end(), P);
-		if(iter != s_TexFormatTupleMap.end())
-			return *iter;
-			
-		return s_TexFormatTupleMap.at(0);
-	}
-	
-	struct Predicate_FindByText
-	{
-		const char* text;
-		
-		Predicate_FindByText(const char* t):text(t){}		
-		bool operator()(const TexFormatTuple& tuple)
-		{
-			return (strcmp(text, tuple.text) == 0);
-		}
-	};
-
-	struct Predicate_FindByPVRPixelFormat
-	{
-		PixelType	pixelType;
-		
-		Predicate_FindByPVRPixelFormat(PixelType pt):pixelType(pt){}		
-		bool operator()(const TexFormatTuple& tuple)
-		{
-			return (pixelType == tuple.pvrtex);
-		}
-	};
-	
-	struct Predicate_FindByPNGBits
-	{
-		int	pngFormat;
-		int bitPerChannel;
-		
-		Predicate_FindByPNGBits(int pf, int bpc):
-		pngFormat(pf), bitPerChannel(bpc)
-		{}
-		
-		bool operator()(const TexFormatTuple& tuple)
-		{
-			return	(pngFormat == tuple.pngFormat)
-				&&	(bitPerChannel == tuple.bitPerChannel);
-		}
-
-	};
-	
-	
-	PixelType	getSupportedPixelType(const char* textFormat)
-	{
-		const TexFormatTuple& tuple = findTuple(Predicate_FindByText(textFormat));
-		return tuple.pvrtex;
-	}
-	
-			
-	PixelType	getSupportedPixelType(int pngFormat, int bitPerChannel)
-	{
-		const TexFormatTuple& tuple = findTuple(Predicate_FindByPNGBits(pngFormat, bitPerChannel));
-		return tuple.pvrtex;
 	}
 
 }}
