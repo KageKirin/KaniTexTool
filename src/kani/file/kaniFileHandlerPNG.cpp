@@ -324,6 +324,11 @@ namespace kani { namespace file {
 			png_uint_32 q = (pvrHeader.getHeight() - i - 1) * stride;
 			rowPtrs[i] = (png_byte*)pvrData.getData() + q;
 		}
+
+		if (bitDepth > 8)
+			png_set_swap(pPngStruct);
+		
+		rowPtrs = new png_byte*[pvrHeader.getHeight()];		
 		
 		png_write_info(pPngStruct, pPngInfo);
 		png_write_rows(pPngStruct, rowPtrs,
@@ -331,6 +336,7 @@ namespace kani { namespace file {
 		
 		delete [] rowPtrs;
 		
+
 		int writtenBytes = (int)ftell(file);
 		fclose(file);
 		
