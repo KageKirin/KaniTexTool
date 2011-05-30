@@ -20,6 +20,14 @@ namespace kani { namespace texture {
 	
 	PixelType	getSupportedPixelType(const char* textFormat);
 	PixelType	getSupportedPixelType(int pngFormat, int bitPerChannel);
+	
+	struct PngFormatInfo
+	{
+		int	colorType;
+		int bits;
+	};
+	
+	PngFormatInfo	getPngFormatInfo(PixelType pixelType);
 
 }}
 

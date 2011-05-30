@@ -79,5 +79,12 @@ namespace kani { namespace texture {
 		return tuple.pvrtex;
 	}
 
+	
+	PngFormatInfo	getPngFormatInfo(PixelType pixelType)
+	{
+		const TexFormatTuple& tuple = findTuple(Predicate_FindByPVRPixelFormat(pixelType));
+		PngFormatInfo rv = { tuple.pngFormat, tuple.bitPerChannel };
+		return rv;
+	}
 }}
 
