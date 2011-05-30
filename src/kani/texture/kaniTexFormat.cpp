@@ -23,16 +23,23 @@ namespace kani { namespace texture {
 		const char* text;
 		PixelType	pvrtex;
 		Format		format;
+		int			pngFormat;
+		int			bitPerChannel;
 		
-		TexFormatTuple(const char* t, PixelType p, Format f):
-		text(t), pvrtex(p), format(f)
+		TexFormatTuple(const char* t, PixelType p, Format f, int pf, int bpc):
+		text(t), pvrtex(p), format(f),
+		pngFormat(pf), bitPerChannel(bpc)
 		{}
 	};
 	
 	
 #define M_CREATEMAP(r, data, elem)	\
 	s_TexFormatTupleMap.push_back	\
-	( TexFormatTuple(BOOST_PP_STRINGIZE(BITUPLE_1ST(elem)), (PixelType)BITUPLE_2ND(elem), BOOST_PP_CAT(data, BITUPLE_1ST(elem)))	);
+	( TexFormatTuple(BOOST_PP_STRINGIZE(QUADTUPLE_1ST(elem)), \
+		(PixelType)QUADTUPLE_2ND(elem), \
+		BOOST_PP_CAT(data, QUADTUPLE_1ST(elem)),\
+		QUADTUPLE_3RD(elem),\
+		QUADTUPLE_4TH(elem)));
 	
 	
 	typedef vector<TexFormatTuple>	TexFormatTupleMap;
@@ -87,6 +94,23 @@ namespace kani { namespace texture {
 		}
 	};
 	
+	struct Predicate_FindByPNGBits
+	{
+		int	pngFormat;
+		int bitPerChannel;
+		
+		Predicate_FindByPNGBits(int pf, int bpc):
+		pngFormat(pf), bitPerChannel(bpc)
+		{}
+		
+		bool operator()(const TexFormatTuple& tuple)
+		{
+			return	(pngFormat == tuple.pngFormat)
+				&&	(bitPerChannel == tuple.bitPerChannel);
+		}
+
+	};
+	
 	
 	PixelType	getSupportedPixelType(const char* textFormat)
 	{
@@ -94,5 +118,11 @@ namespace kani { namespace texture {
 		return tuple.pvrtex;
 	}
 	
+			
+	PixelType	getSupportedPixelType(int pngFormat, int bitPerChannel)
+	{
+		const TexFormatTuple& tuple = findTuple(Predicate_FindByPNGBits(pngFormat, bitPerChannel));
+		return tuple.pvrtex;
+	}
 
 }}

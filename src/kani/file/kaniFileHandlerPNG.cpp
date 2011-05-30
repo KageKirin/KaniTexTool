@@ -7,11 +7,17 @@
 //
 
 #include "kaniFileHandlerPNG.h"
+#include "../texture/kaniTexFormat.h"
 #include <libpng/png.h>
 
-#include <fstream>
+#include <pvrtex/CPVRTexture.h>
+#include <pvrtex/CPVRTextureHeader.h>
+#include <pvrtex/CPVRTextureData.h>
+
 #include <iostream>
+#include <cstdio>
 #include <cassert>
+
 
 #define PNGSIGSIZE 8
 
@@ -27,97 +33,95 @@ namespace kani { namespace file {
 	using std::cerr;
 	using std::endl;
 	
-	void userReadData(png_structp pngPtr, png_bytep data, png_size_t length)
-	{
-		//Here we get our IO pointer back from the read struct.
-		//This is the parameter we passed to the png_set_read_fn() function.
-		//Our std::istream pointer.
-		png_voidp a = png_get_io_ptr(pngPtr);
-		//Cast the pointer to std::istream* and read 'length' bytes into 'data'
-		((std::istream*)a)->read((char*)data, length);
-	}
+	//------------------------------------------------------------
 	
 	template<>
-	int FileHandlerImpl<FileType_PNG>::internal_read(const string& filename, CPVRTextureHeader&, CPVRTextureData&) const
-	{		
-		ifstream file(filename.c_str(), ios_base::in | ios_base::binary);
-		if(!file.is_open())
+	int FileHandlerImpl<FileType_PNG>::internal_read(const string& filename, CPVRTextureHeader& pvrHeader, CPVRTextureData& pvrData) const
+	{	
+		FILE*	file = fopen(filename.c_str(), "rb");
+		if(!file)
 			return -2;
-			
-		file.seekg(0, ios_base::end);
-		size_t fileSize = file.tellg();
-		file.seekg (0, ios_base::beg);
-	
-		//check if png
-		png_byte pngsig[PNGSIGSIZE];
-		file.read((char*)pngsig, sizeof(pngsig));
-		
-		int isPng = png_sig_cmp(pngsig, 0, PNGSIGSIZE);
-		assert(isPng == 0);
-		if(isPng != 0)
+				
+		png_byte header[PNGSIGSIZE];		
+		fread(header, sizeof(header), 1, file);
+		int isPng = !png_sig_cmp(header, 0, sizeof(header));
+		assert(isPng);
+		if(!isPng)
 			return -3;
-	
-		png_structp pngPtr = png_create_read_struct(PNG_LIBPNG_VER_STRING, NULL, NULL, NULL);
-		assert(pngPtr);
-		if(!pngPtr)
+		
+
+		png_struct*	pPngStruct = png_create_read_struct(PNG_LIBPNG_VER_STRING,
+														NULL,	//user_error_ptr,
+														NULL,	//user_error_fn,
+														NULL	//user_warning_fn
+														);
+		assert(pPngStruct);
+		if(!pPngStruct)
 			return -4;
-			
-		png_infop infoPtr = png_create_info_struct(pngPtr);
-		assert(infoPtr);
-		if(!infoPtr)
+
+		png_info* pPngInfo = png_create_info_struct(pPngStruct);
+		assert(pPngInfo);
+		if(!pPngInfo)
 		{
-		    png_destroy_read_struct(&pngPtr, (png_infopp)0, (png_infopp)0);
+			png_destroy_read_struct(&pPngStruct, (png_infopp)NULL, (png_infopp)NULL);
+			return -5;
+		}
+
+		png_info* pPngInfo_End = png_create_info_struct(pPngStruct);
+		if(!pPngInfo_End)
+		{
+			png_destroy_read_struct(&pPngStruct, &pPngInfo, (png_infopp)NULL);
 			return -5;
 		}
 		
-		//Here I've defined 2 pointers up front, so I can use them in error handling.
-		//I will explain these 2 later. Just making sure these get deleted on error.
-		png_bytep* rowPtrs = NULL;
-		char* data = NULL;
 
-		if (setjmp(png_jmpbuf(pngPtr)))
+		png_bytep*	rowPtrs = NULL;
+		char*		data = NULL;
+
+		
+		
+		//error handling
+		if(setjmp(png_jmpbuf(pPngStruct)))
 		{
-			//An error occured, so clean up what we have allocated so far...
-			png_destroy_read_struct(&pngPtr, &infoPtr,(png_infopp)0);
+			png_destroy_read_struct(&pPngStruct, &pPngInfo, &pPngInfo_End);
+			fclose(file);
+			
 			if (rowPtrs != NULL)
 				delete [] rowPtrs;
 			
 			if (data != NULL)
 				delete [] data;
-
-			cout << "ERROR: An error occured while reading the PNG file" << endl;
-
-			//Make sure you return here. libPNG will jump to here if something
-			//goes wrong, and if you continue with your normal code, you might
-			//End up with an infinite loop.
-			return -6; // Do your own error handling here.
+			
+			return -6;
 		}
 		
+		//proper file reading starts here
+		png_init_io(pPngStruct, file);
 		
-		png_set_read_fn(pngPtr,(voidp)&file, userReadData);
+		//increment internal read pointer by sizeof(header) since we already read it
+	    png_set_sig_bytes(pPngStruct, sizeof(header));
 		
 		
-		//Set the amount signature bytes we've already read:
-		//We've defined PNGSIGSIZE as 8;
-		png_set_sig_bytes(pngPtr, PNGSIGSIZE);
+		//optional: set special chunk handling
+		//png_set_read_user_chunk_fn(pPngStruct, user_chunk_ptr, read_chunk_callback);
+		
+		//optional: set progress handling
+		//png_set_read_status_fn(pPngStruct, read_row_callback);
+	
+		//read info	
+		png_read_info(pPngStruct, pPngInfo);
+		
 
-		//Now call png_read_info with our pngPtr as image handle, and infoPtr to receive the file info.
-		png_read_info(pngPtr, infoPtr);
+		png_uint_32 width		= png_get_image_width(pPngStruct, pPngInfo);
+		png_uint_32 height		= png_get_image_height(pPngStruct, pPngInfo);
+		png_uint_32 bitDepth	= png_get_bit_depth(pPngStruct, pPngInfo);
+		png_uint_32 channels	= png_get_channels(pPngStruct, pPngInfo);
+		png_uint_32 colorType	= png_get_color_type(pPngStruct, pPngInfo);
+		png_uint_32	interlaceType	= png_get_interlace_type(pPngStruct, pPngInfo);
+		png_uint_32	compressionType	= png_get_compression_type(pPngStruct, pPngInfo);
+		png_uint_32	filterType	= png_get_filter_type(pPngStruct, pPngInfo);
 		
-		
-		png_uint_32 imgWidth =  png_get_image_width(pngPtr, infoPtr);
-		png_uint_32 imgHeight = png_get_image_height(pngPtr, infoPtr);
 
-		//bits per CHANNEL! note: not per pixel!
-		png_uint_32 bitdepth   = png_get_bit_depth(pngPtr, infoPtr);
-
-		//Number of channels
-		png_uint_32 channels   = png_get_channels(pngPtr, infoPtr);
-
-		//Color type. (RGB, RGBA, Luminance, luminance alpha... palette... etc)
-		png_uint_32 color_type = png_get_color_type(pngPtr, infoPtr);
-
-		
 		//possible values for color_type
 		//TODO: add to enum
 		//TODO: in case of PALETTE: transform to RGB (A)
@@ -127,42 +131,45 @@ namespace kani { namespace file {
 		//PNG_COLOR_TYPE_RGB_ALPHA
 		//PNG_COLOR_TYPE_GRAY_ALPHA
 		
-		switch (color_type)
+		switch (colorType)
 		{
         case PNG_COLOR_TYPE_PALETTE:
-            png_set_palette_to_rgb(pngPtr);
+            png_set_palette_to_rgb(pPngStruct);
             //Don't forget to update the channel info (thanks Tom!)
             //It's used later to know how big a buffer we need for the image
             channels = 3;           
             break;
         
 		case PNG_COLOR_TYPE_GRAY:
-            if (bitdepth < 8)
-				png_set_expand_gray_1_2_4_to_8(pngPtr);
+            if (bitDepth < 8)
+				png_set_expand_gray_1_2_4_to_8(pPngStruct);
             //And the bitdepth info
-            bitdepth = 8;
+            bitDepth = 8;
             break;
 		}
 		
 		// if the image has a transperancy set.. convert it to a full Alpha channel
-		if (png_get_valid(pngPtr, infoPtr, PNG_INFO_tRNS))
+		if(png_get_valid(pPngStruct, pPngInfo, PNG_INFO_tRNS))
 		{
-			png_set_tRNS_to_alpha(pngPtr);
-			channels+=1;
+			png_set_tRNS_to_alpha(pPngStruct);
+			++channels;
 		}
 		
 		//TODO: in case we need to downsample
-		//We don't support 16 bit precision.. so if the image Has 16 bits per channel
-        //precision... round it down to 8.
-		if (bitdepth == 16)
-			png_set_strip_16(pngPtr);
+		//if(bitDepth == 16)
+		//	png_set_strip_16(pPngStruct);
 			
 			
 		cout << "read PNG file" << endl;
-		cout << imgWidth << " x " << imgHeight << endl;
-		cout << bitdepth << " x " << channels << endl;
-		cout << color_type << endl;
-			
+		cout << width << " x " << height << endl;
+		cout << bitDepth << " x " << channels << endl;
+		cout << colorType << endl;
+
+		
+		pvrHeader = CPVRTextureHeader(width, height);
+		pvrHeader.setPixelType(texture::getSupportedPixelType(colorType, bitDepth));
+		
+		/*	
 		//Here's one of the pointers we've defined in the error handler section:
 		//Array of row pointers. One for every row.
 		rowPtrs = new png_bytep[imgHeight];
@@ -199,7 +206,7 @@ namespace kani { namespace file {
 		
 		//And don't forget to clean up the read and info structs !
 		png_destroy_read_struct(&pngPtr, &infoPtr,(png_infopp)0);
-		
+		*/
 		
 
 		return -3;
