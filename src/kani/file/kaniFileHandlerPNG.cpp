@@ -24,6 +24,7 @@
 
 namespace kani { namespace file {
 	
+	//ref: @see http://www.libpng.org/pub/png/libpng-manual.txt
 	//ref: @see http://www.piko3d.com/tutorials/libpng-tutorial-loading-png-files-from-streams
 	//ref: @see http://zarb.org/~gc/html/libpng.html
 	
@@ -34,6 +35,8 @@ namespace kani { namespace file {
 	using std::endl;
 	
 	//------------------------------------------------------------
+	//TODO: use vector<png_byte*> rowPtrs instead of current array
+	//TODO: use for data as well and stop worrying about memory leaks
 	
 	template<>
 	int FileHandlerImpl<FileType_PNG>::internal_read(const string& filename, CPVRTextureHeader& pvrHeader, CPVRTextureData& pvrData) const
@@ -169,7 +172,13 @@ namespace kani { namespace file {
 
 		
 		pvrHeader = CPVRTextureHeader(width, height);
-		pvrHeader.setPixelType(texture::getSupportedPixelType(colorType, bitDepth));
+		pvrtexlib::PixelType pixelType = texture::getSupportedPixelType(colorType, bitDepth);
+		
+		//format supported?
+		if((int)pixelType < 0)
+			return -1;
+		
+		pvrHeader.setPixelType(pixelType);
 		
 		//create PVR texture data
 		png_uint_32 imageSize = width * height * bitDepth * channels / 8;
@@ -195,10 +204,7 @@ namespace kani { namespace file {
 		png_read_image(pPngStruct, rowPtrs);
 
 
-		//Delete the row pointers array....
 		delete[] rowPtrs;		
-		
-		//And don't forget to clean up the read and info structs !
 		png_destroy_read_struct(&pPngStruct, &pPngInfo, &pPngInfo_End);
 
 		int readBytes = (int)ftell(file);
@@ -209,7 +215,7 @@ namespace kani { namespace file {
 	}
 	
 	template<>
-	int FileHandlerImpl<FileType_PNG>::internal_write(const string& filename, const CPVRTextureHeader&, const CPVRTextureData&) const
+	int FileHandlerImpl<FileType_PNG>::internal_write(const string& filename, const CPVRTextureHeader& pvrHeader, const CPVRTextureData& pvrData) const
 	{
 		FILE*	file = fopen(filename.c_str(), "w+b");
 		assert(file);
@@ -232,9 +238,103 @@ namespace kani { namespace file {
 			png_destroy_write_struct(&pPngStruct, (png_info**)NULL);
 			return -5;
 		}
+		
+		png_byte**	rowPtrs = NULL;
+
+		//error handler
+		if (setjmp(png_jmpbuf(pPngStruct)))
+		{
+			png_destroy_write_struct(&pPngStruct, &pPngInfo);
+			fclose(file);
+
+			if(rowPtrs)
+				delete [] rowPtrs;
+			
+			return -6;
+		}
+		
+		png_init_io(pPngStruct, file);
+		
+		//optional progress handler
+		//png_set_write_status_fn(pPngStruct, write_row_callback);
+		
+		png_set_filter(pPngStruct, 0,
+					   PNG_FILTER_NONE  | PNG_FILTER_VALUE_NONE
+					   //   |
+					   //	   PNG_FILTER_SUB   | PNG_FILTER_VALUE_SUB  |
+					   //	   PNG_FILTER_UP    | PNG_FILTER_VALUE_UP   |
+					   //	   PNG_FILTER_AVG   | PNG_FILTER_VALUE_AVG  |
+					   //	   PNG_FILTER_PAETH | PNG_FILTER_VALUE_PAETH|
+					   //	   PNG_ALL_FILTERS
+					   );
+		
+		pvrtexlib::PixelType pvrPixelType = pvrHeader.getPixelType();
+		texture::PngFormatInfo pngFormatInfo = texture::getPngFormatInfo(pvrPixelType);
+
+		//format supported?
+		if(pngFormatInfo.colorType < 0)
+			return -1;
+		
+		png_uint_32 colorType	= (png_uint_32)pngFormatInfo.colorType;
+		png_uint_32	bitDepth	= (png_uint_32)pngFormatInfo.bits;
+		png_uint_32 channels	= 0;
+		
+		switch(colorType)
+		{
+			case PNG_COLOR_TYPE_GRAY:
+				channels = 1;
+				break;
+
+			case PNG_COLOR_TYPE_GA:
+				channels = 2;
+				break;
+				
+			case PNG_COLOR_TYPE_RGB:
+				channels = 3;
+				break;
+				
+			case PNG_COLOR_TYPE_RGBA:
+				channels = 4;
+				break;
+		}
 
 		
-		return -3;
+		png_set_IHDR(pPngStruct, pPngInfo,
+					 pvrHeader.getWidth(), pvrHeader.getHeight(),
+					 bitDepth, colorType, 
+					 PNG_INTERLACE_NONE,
+					 PNG_COMPRESSION_TYPE_DEFAULT,
+					 PNG_FILTER_TYPE_DEFAULT);
+		
+
+		if (bitDepth > 8)
+			png_set_swap(pPngStruct);
+		
+		rowPtrs = new png_byte*[pvrHeader.getHeight()];
+		const png_uint_32 stride = pvrHeader.getWidth() * bitDepth * channels / 8;
+
+		for(png_uint_32 i = 0; i < pvrHeader.getHeight(); ++i)
+		{
+			rowPtrs[i] = NULL;
+		}
+		
+		//set row ptr to starting address
+		for(png_uint_32 i = 0; i < pvrHeader.getHeight(); ++i)
+		{
+			png_uint_32 q = (pvrHeader.getHeight() - i - 1) * stride;
+			rowPtrs[i] = (png_byte*)pvrData.getData() + q;
+		}
+		
+		png_write_info(pPngStruct, pPngInfo);
+		png_write_rows(pPngStruct, rowPtrs,
+					   pvrHeader.getHeight());
+		
+		delete [] rowPtrs;
+		
+		int writtenBytes = (int)ftell(file);
+		fclose(file);
+		
+		return writtenBytes;
 	}
 
 	
