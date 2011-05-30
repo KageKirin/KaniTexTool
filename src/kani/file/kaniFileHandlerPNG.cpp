@@ -121,14 +121,12 @@ namespace kani { namespace file {
 		png_uint_32 bitDepth	= png_get_bit_depth(pPngStruct, pPngInfo);
 		png_uint_32 channels	= png_get_channels(pPngStruct, pPngInfo);
 		png_uint_32 colorType	= png_get_color_type(pPngStruct, pPngInfo);
-		png_uint_32	interlaceType	= png_get_interlace_type(pPngStruct, pPngInfo);
-		png_uint_32	compressionType	= png_get_compression_type(pPngStruct, pPngInfo);
-		png_uint_32	filterType	= png_get_filter_type(pPngStruct, pPngInfo);
+		//png_uint_32	interlaceType	= png_get_interlace_type(pPngStruct, pPngInfo);
+		//png_uint_32	compressionType	= png_get_compression_type(pPngStruct, pPngInfo);
+		//png_uint_32	filterType	= png_get_filter_type(pPngStruct, pPngInfo);
 		
 
-		//possible values for color_type
-		//TODO: add to enum
-		//TODO: in case of PALETTE: transform to RGB (A)
+		//possible values for color_type		
 		//PNG_COLOR_TYPE_GRAY
 		//PNG_COLOR_TYPE_PALETTE
 		//PNG_COLOR_TYPE_RGB
@@ -147,7 +145,7 @@ namespace kani { namespace file {
 
 			case PNG_COLOR_TYPE_GA:
 			case PNG_COLOR_TYPE_GRAY:
-				if (bitDepth < 8)
+				if(bitDepth < 8)
 					png_set_expand_gray_1_2_4_to_8(pPngStruct);
 				bitDepth = 8;
 				break;
