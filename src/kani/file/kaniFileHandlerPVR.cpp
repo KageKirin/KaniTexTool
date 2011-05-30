@@ -12,12 +12,17 @@
 #include <pvrtex/CPVRTextureData.h>
 #include <fstream>
 #include <cstdio>
+#include <vector>
 
 namespace kani { namespace file {
 	
 	using std::ifstream;
 	using std::ofstream;
 	using std::ios_base;
+	using std::vector;
+	
+		//TODO: use vector<png_byte*> rowPtrs instead of current array
+	//TODO: use for data as well and stop worrying about memory leaks
 	
 	struct _PVRTexHeader
 	{
@@ -49,19 +54,17 @@ namespace kani { namespace file {
 		size_t fileSize = file.tellg();
 		file.seekg (0, ios_base::beg);
 		
-		char* buffer = new char[fileSize];
-		file.read(buffer, fileSize);
+		vector<char> buffer(fileSize, 0);
+		file.read((char*)&buffer[0], fileSize);
 		
 		int readBytes = (int)file.tellg();
 		file.close();
 		
 		{
-			pvrtexlib::CPVRTexture tex((pvrtexlib::uint8*)buffer);
+			pvrtexlib::CPVRTexture tex((pvrtexlib::uint8*)&buffer[0]);
 			header	= CPVRTextureHeader(tex.getHeader());		
 			data	= CPVRTextureData(tex.getData());
 		}		
-		delete [] buffer;
-		
 		return readBytes;
 	}
 	

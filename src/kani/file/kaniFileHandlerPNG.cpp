@@ -37,8 +37,6 @@ namespace kani { namespace file {
 	using std::vector;
 	
 	//------------------------------------------------------------
-	//TODO: use vector<png_byte*> rowPtrs instead of current array
-	//TODO: use for data as well and stop worrying about memory leaks
 	
 	template<>
 	int FileHandlerImpl<FileType_PNG>::internal_read(const string& filename, CPVRTextureHeader& pvrHeader, CPVRTextureData& pvrData) const
