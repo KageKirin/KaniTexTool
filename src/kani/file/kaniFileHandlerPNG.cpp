@@ -39,6 +39,7 @@ namespace kani { namespace file {
 	int FileHandlerImpl<FileType_PNG>::internal_read(const string& filename, CPVRTextureHeader& pvrHeader, CPVRTextureData& pvrData) const
 	{	
 		FILE*	file = fopen(filename.c_str(), "rb");
+		assert(file);
 		if(!file)
 			return -2;
 				
@@ -63,7 +64,7 @@ namespace kani { namespace file {
 		assert(pPngInfo);
 		if(!pPngInfo)
 		{
-			png_destroy_read_struct(&pPngStruct, (png_infopp)NULL, (png_infopp)NULL);
+			png_destroy_read_struct(&pPngStruct, (png_info**)NULL, (png_info**)NULL);
 			return -5;
 		}
 
@@ -75,7 +76,7 @@ namespace kani { namespace file {
 		}
 		
 
-		png_bytep*	rowPtrs = NULL;
+		png_byte**	rowPtrs = NULL;
 		char*		data = NULL;
 
 		
@@ -128,24 +129,25 @@ namespace kani { namespace file {
 		//PNG_COLOR_TYPE_GRAY
 		//PNG_COLOR_TYPE_PALETTE
 		//PNG_COLOR_TYPE_RGB
-		//PNG_COLOR_TYPE_RGB_ALPHA
-		//PNG_COLOR_TYPE_GRAY_ALPHA
+		//PNG_COLOR_TYPE_RGBA
+		//PNG_COLOR_TYPE_GA
 		
+		//color type conversion
 		switch (colorType)
 		{
-        case PNG_COLOR_TYPE_PALETTE:
-            png_set_palette_to_rgb(pPngStruct);
-            //Don't forget to update the channel info (thanks Tom!)
-            //It's used later to know how big a buffer we need for the image
-            channels = 3;           
-            break;
+			case PNG_COLOR_TYPE_PALETTE:
+				png_set_palette_to_rgb(pPngStruct);
+				channels = 3;
+				colorType = PNG_COLOR_TYPE_RGB;
+				break;
         
-		case PNG_COLOR_TYPE_GRAY:
-            if (bitDepth < 8)
-				png_set_expand_gray_1_2_4_to_8(pPngStruct);
-            //And the bitdepth info
-            bitDepth = 8;
-            break;
+
+			case PNG_COLOR_TYPE_GA:
+			case PNG_COLOR_TYPE_GRAY:
+				if (bitDepth < 8)
+					png_set_expand_gray_1_2_4_to_8(pPngStruct);
+				bitDepth = 8;
+				break;
 		}
 		
 		// if the image has a transperancy set.. convert it to a full Alpha channel
@@ -169,53 +171,69 @@ namespace kani { namespace file {
 		pvrHeader = CPVRTextureHeader(width, height);
 		pvrHeader.setPixelType(texture::getSupportedPixelType(colorType, bitDepth));
 		
-		/*	
-		//Here's one of the pointers we've defined in the error handler section:
-		//Array of row pointers. One for every row.
-		rowPtrs = new png_bytep[imgHeight];
-
-		//Alocate a buffer with enough space.
-		//(Don't use the stack, these blocks get big easilly)
-		//This pointer was also defined in the error handling section, so we can clean it up on error.
-		data = new char[imgWidth * imgHeight * bitdepth * channels / 8];
-		//This is the length in bytes, of one row.
-		const unsigned int stride = imgWidth * bitdepth * channels / 8;
-
-		//A little for-loop here to set all the row pointers to the starting
-		//Adresses for every row in the buffer
-
-		for (size_t i = 0; i < imgHeight; i++) 
+		//create PVR texture data
+		png_uint_32 imageSize = width * height * bitDepth * channels / 8;
+		pvrData = CPVRTextureData((size_t)imageSize);
+		
+		//decompression
+		rowPtrs	= new png_byte*[height];
+		const png_uint_32 stride = width * bitDepth * channels / 8;
+		
+		for(png_uint_32 i = 0; i < height; ++i)
 		{
-			//Set the pointer to the data pointer + i times the row stride.
-			//Notice that the row order is reversed with q.
-			//This is how at least OpenGL expects it,
-			//and how many other image loaders present the data.
-			uint64 q = (imgHeight- i - 1) * stride;
-			rowPtrs[i] = (png_bytep)data + q;
+			rowPtrs[i] = NULL;
 		}
-
-		//And here it is! The actuall reading of the image!
-		//Read the imagedata and write it to the adresses pointed to
-		//by rowptrs (in other words: our image databuffer)
-		png_read_image(pngPtr, rowPtrs);
+		
+		//set row ptr to starting address
+		for(png_uint_32 i = 0; i < height; ++i)
+		{
+			png_uint_32 q = (height - i - 1) * stride;
+			rowPtrs[i] = (png_byte*)pvrData.getData() + q;
+		}
+		
+		//read image into row ptrs, which is pointing to our data buffer
+		png_read_image(pPngStruct, rowPtrs);
 
 
 		//Delete the row pointers array....
-		delete[] (png_bytep)rowPtrs;
-		
+		delete[] rowPtrs;		
 		
 		//And don't forget to clean up the read and info structs !
-		png_destroy_read_struct(&pngPtr, &infoPtr,(png_infopp)0);
-		*/
-		
+		png_destroy_read_struct(&pPngStruct, &pPngInfo, &pPngInfo_End);
 
-		return -3;
+		int readBytes = (int)ftell(file);
+		fclose(file);
+		
+		return readBytes;
 		
 	}
 	
 	template<>
 	int FileHandlerImpl<FileType_PNG>::internal_write(const string& filename, const CPVRTextureHeader&, const CPVRTextureData&) const
 	{
+		FILE*	file = fopen(filename.c_str(), "w+b");
+		assert(file);
+		if(!file)
+			return -2;
+		
+		png_struct* pPngStruct = png_create_write_struct(PNG_LIBPNG_VER_STRING,
+														 NULL, //user_error_ptr,
+														 NULL, //user_error_fn,
+														 NULL //user_warning_fn
+														 );
+		assert(pPngStruct);
+		if(!pPngStruct)
+			return -4;
+		
+		png_info* pPngInfo = png_create_info_struct(pPngStruct);
+		assert(pPngInfo);
+		if(!pPngInfo)
+		{
+			png_destroy_write_struct(&pPngStruct, (png_info**)NULL);
+			return -5;
+		}
+
+		
 		return -3;
 	}
 
