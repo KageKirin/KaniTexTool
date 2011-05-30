@@ -7,17 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5AC2254C13939FFA00420F1F /* libboost_program_options.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AC2254B13939FFA00420F1F /* libboost_program_options.dylib */; };
-		5AC225531393A03300420F1F /* boost.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AC2254F1393A03300420F1F /* boost.framework */; };
-		5AC225541393A03300420F1F /* libpng.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AC225501393A03300420F1F /* libpng.framework */; };
-		5AC225551393A03300420F1F /* pvrtex.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AC225511393A03300420F1F /* pvrtex.framework */; };
-		5AC225561393A03300420F1F /* squish.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AC225521393A03300420F1F /* squish.framework */; };
 		5ADC8EC21393948F001E8B76 /* kaniTexFormat.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5ADC8EC01393948F001E8B76 /* kaniTexFormat.cpp */; };
 		5ADC8EC51393949D001E8B76 /* kaniCmdLine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5ADC8EC31393949D001E8B76 /* kaniCmdLine.cpp */; };
 		5ADC8EC8139394AB001E8B76 /* kaniConversion.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5ADC8EC6139394AB001E8B76 /* kaniConversion.cpp */; };
 		5ADC8ECB139394C2001E8B76 /* kaniFileHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5ADC8EC9139394C2001E8B76 /* kaniFileHandler.cpp */; };
 		5ADC8ECE1393954E001E8B76 /* kaniTexPixelFormat.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5ADC8ECC1393954E001E8B76 /* kaniTexPixelFormat.cpp */; };
 		837829FE13929AE70029B412 /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 837829FD13929AE70029B412 /* libz.1.2.5.dylib */; };
+		83B3E178139437F300F12CA6 /* libpng.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83B3E175139437F300F12CA6 /* libpng.framework */; };
+		83B3E179139437F300F12CA6 /* squish.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83B3E176139437F300F12CA6 /* squish.framework */; };
+		83B3E17E1394391C00F12CA6 /* boost.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83B3E17D1394391C00F12CA6 /* boost.framework */; };
+		83B3E180139439C100F12CA6 /* pvrtex.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83B3E17F139439C100F12CA6 /* pvrtex.framework */; };
 		83BC45D6138560E900E4FAEC /* kaniFileHandlerDDS.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83BC45CE138560E800E4FAEC /* kaniFileHandlerDDS.cpp */; };
 		83BC45D7138560E900E4FAEC /* kaniFileHandlerKTX.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83BC45D0138560E800E4FAEC /* kaniFileHandlerKTX.cpp */; };
 		83BC45D8138560E900E4FAEC /* kaniFileHandlerPNG.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83BC45D2138560E800E4FAEC /* kaniFileHandlerPNG.cpp */; };
@@ -42,11 +41,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		5AC2254B13939FFA00420F1F /* libboost_program_options.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libboost_program_options.dylib; path = ../../../../../opt/local/lib/libboost_program_options.dylib; sourceTree = "<group>"; };
-		5AC2254F1393A03300420F1F /* boost.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = boost.framework; path = "addtional-libs/Library/Frameworks/boost.framework"; sourceTree = "<group>"; };
-		5AC225501393A03300420F1F /* libpng.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = libpng.framework; path = "addtional-libs/Library/Frameworks/libpng.framework"; sourceTree = "<group>"; };
-		5AC225511393A03300420F1F /* pvrtex.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = pvrtex.framework; path = "addtional-libs/Library/Frameworks/pvrtex.framework"; sourceTree = "<group>"; };
-		5AC225521393A03300420F1F /* squish.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = squish.framework; path = "addtional-libs/Library/Frameworks/squish.framework"; sourceTree = "<group>"; };
 		5ADC8EC01393948F001E8B76 /* kaniTexFormat.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = kaniTexFormat.cpp; path = src/kani/texture/kaniTexFormat.cpp; sourceTree = "<group>"; };
 		5ADC8EC11393948F001E8B76 /* kaniTexFormat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kaniTexFormat.h; path = src/kani/texture/kaniTexFormat.h; sourceTree = "<group>"; };
 		5ADC8EC31393949D001E8B76 /* kaniCmdLine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = kaniCmdLine.cpp; path = src/kani/core/kaniCmdLine.cpp; sourceTree = "<group>"; };
@@ -59,6 +53,10 @@
 		5ADC8ECD1393954E001E8B76 /* kaniTexPixelFormat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kaniTexPixelFormat.h; path = src/kani/texture/kaniTexPixelFormat.h; sourceTree = "<group>"; };
 		83724B0F13772BA500391D7B /* KaniTexTool */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = KaniTexTool; sourceTree = BUILT_PRODUCTS_DIR; };
 		837829FD13929AE70029B412 /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = ../../../../../opt/local/lib/libz.1.2.5.dylib; sourceTree = "<group>"; };
+		83B3E175139437F300F12CA6 /* libpng.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = libpng.framework; path = "addtional-libs/Library/Frameworks/libpng.framework"; sourceTree = "<group>"; };
+		83B3E176139437F300F12CA6 /* squish.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = squish.framework; path = "addtional-libs/Library/Frameworks/squish.framework"; sourceTree = "<group>"; };
+		83B3E17D1394391C00F12CA6 /* boost.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = boost.framework; path = "addtional-libs/Library/Frameworks/boost.framework"; sourceTree = "<group>"; };
+		83B3E17F139439C100F12CA6 /* pvrtex.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = pvrtex.framework; path = "addtional-libs/Library/Frameworks/pvrtex.framework"; sourceTree = "<group>"; };
 		83BC45CE138560E800E4FAEC /* kaniFileHandlerDDS.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = kaniFileHandlerDDS.cpp; path = src/kani/file/kaniFileHandlerDDS.cpp; sourceTree = "<group>"; };
 		83BC45CF138560E800E4FAEC /* kaniFileHandlerDDS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kaniFileHandlerDDS.h; path = src/kani/file/kaniFileHandlerDDS.h; sourceTree = "<group>"; };
 		83BC45D0138560E800E4FAEC /* kaniFileHandlerKTX.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = kaniFileHandlerKTX.cpp; path = src/kani/file/kaniFileHandlerKTX.cpp; sourceTree = "<group>"; };
@@ -79,7 +77,6 @@
 		83C0A52513772F7B006ED394 /* kaniTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kaniTypes.h; path = src/kani/core/kaniTypes.h; sourceTree = "<group>"; };
 		83C0A54D13789ADF006ED394 /* kaniEndian.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kaniEndian.h; path = src/kani/core/kaniEndian.h; sourceTree = "<group>"; };
 		83C0A54F13789E03006ED394 /* kaniFileTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kaniFileTypes.h; path = src/kani/file/kaniFileTypes.h; sourceTree = "<group>"; };
-		83C0A5501378A25A006ED394 /* pvrtex.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = pvrtex.framework; path = "addtional-libs/Library/Frameworks/pvrtex.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,11 +84,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				83C0A5511378A25A006ED394 /* pvrtex.framework in Frameworks */,
-				83478BD9137FFDF000A11073 /* libboost_program_options.dylib in Frameworks */,
-				832035D01389C8C8000A9399 /* libpng.framework in Frameworks */,
-				832035D21389C8D7000A9399 /* squish.framework in Frameworks */,
 				837829FE13929AE70029B412 /* libz.1.2.5.dylib in Frameworks */,
+				83B3E178139437F300F12CA6 /* libpng.framework in Frameworks */,
+				83B3E179139437F300F12CA6 /* squish.framework in Frameworks */,
+				83B3E17E1394391C00F12CA6 /* boost.framework in Frameworks */,
+				83B3E180139439C100F12CA6 /* pvrtex.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -141,7 +138,6 @@
 			isa = PBXGroup;
 			children = (
 				837829FD13929AE70029B412 /* libz.1.2.5.dylib */,
-				83478BD8137FFDF000A11073 /* libboost_program_options.dylib */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -149,9 +145,10 @@
 		83C0A51013772C5C006ED394 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				832035D11389C8D7000A9399 /* squish.framework */,
-				832035CF1389C8C8000A9399 /* libpng.framework */,
-				83C0A5501378A25A006ED394 /* pvrtex.framework */,
+				83B3E17F139439C100F12CA6 /* pvrtex.framework */,
+				83B3E17D1394391C00F12CA6 /* boost.framework */,
+				83B3E175139437F300F12CA6 /* libpng.framework */,
+				83B3E176139437F300F12CA6 /* squish.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
