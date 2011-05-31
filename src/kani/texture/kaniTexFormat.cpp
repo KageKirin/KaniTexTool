@@ -14,9 +14,10 @@
 
 namespace kani { namespace texture {
 
-	TexFormatTuple::TexFormatTuple(const char* t, PixelType p, Format f, int pf, int bpc):
+	TexFormatTuple::TexFormatTuple(const char* t, PixelType p, Format f, int pf, int bpc, uint32 o):
 	text(t), pvrtex(p), format(f),
-	pngFormat(pf), bitPerChannel(bpc)
+	pngFormat(pf), bitPerChannel(bpc),
+	order(o)
 	{
 	}
 	
@@ -29,7 +30,9 @@ namespace kani { namespace texture {
 		(PixelType)QUINTUPLE_2ND(elem), \
 		BOOST_PP_CAT(data, QUINTUPLE_1ST(elem)),\
 		QUINTUPLE_3RD(elem),\
-		QUINTUPLE_4TH(elem)));
+		QUINTUPLE_4TH(elem),\
+		(uint32)QUINTUPLE_5TH(elem)\
+	));
 	
 	
 	void createTexFormatTupleMap()

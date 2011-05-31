@@ -10,6 +10,7 @@
 #ifndef KANI_TEX_FORMAT
 #define KANI_TEX_FORMAT	1
 
+#include "../core/kaniTypes.h"
 #include <pvrtex/PVRTexLibGlobals.h>
 #include <libpng/png.h>
 #include <boost/preprocessor/cat.hpp>
@@ -268,13 +269,14 @@ namespace kani { namespace texture {
 
 	struct TexFormatTuple
 	{
-		const char* text;
+		const char*	text;
 		PixelType	pvrtex;
 		Format		format;
 		int			pngFormat;
 		int			bitPerChannel;
+		uint32		order;
 		
-		TexFormatTuple(const char* t, PixelType p, Format f, int pf, int bpc);
+		TexFormatTuple(const char* t, PixelType p, Format f, int pf, int bpc, uint32 o);
 	};
 	
 	typedef vector<TexFormatTuple>	TexFormatTupleMap;
