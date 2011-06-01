@@ -26,12 +26,12 @@ namespace kani { namespace texture {
 	
 #define M_CREATEMAP(r, data, elem)	\
 	s_TexFormatTupleMap.push_back	\
-	( TexFormatTuple(BOOST_PP_STRINGIZE(QUINTUPLE_1ST(elem)), \
-		(PixelType)QUINTUPLE_2ND(elem), \
-		BOOST_PP_CAT(data, QUINTUPLE_1ST(elem)),\
-		QUINTUPLE_3RD(elem),\
-		QUINTUPLE_4TH(elem),\
-		(uint32)QUINTUPLE_5TH(elem)\
+	( TexFormatTuple(BOOST_PP_STRINGIZE(SEXTUPLE_1ST(elem)), \
+		(PixelType)SEXTUPLE_2ND(elem), \
+		BOOST_PP_CAT(data, SEXTUPLE_1ST(elem)),\
+		SEXTUPLE_3RD(elem),\
+		SEXTUPLE_4TH(elem),\
+		(uint32)SEXTUPLE_5TH(elem)\
 	));
 	
 	

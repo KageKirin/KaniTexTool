@@ -10,6 +10,7 @@
 
 #include "../core/kaniTypes.h"
 #include "../core/kaniEndian.h"
+#include "../texture/kaniTexFourCC.h"
 
 #include <pvrtex/CPVRTexture.h>
 #include <pvrtex/CPVRTextureHeader.h>
@@ -61,18 +62,6 @@ namespace dds
 	using namespace kani::endian;
 
 	static const uint32 DDS_Sign = static_swap<uint32>::swap<uint32('DDS\0')>::value;
-	
-	static const uint32 FourCC_DXT1 = static_swap<uint32>::swap<uint32('DXT1')>::value;
-	static const uint32 FourCC_DXT2 = static_swap<uint32>::swap<uint32('DXT2')>::value;
-	static const uint32 FourCC_DXT3 = static_swap<uint32>::swap<uint32('DXT3')>::value;
-	static const uint32 FourCC_DXT4 = static_swap<uint32>::swap<uint32('DXT4')>::value;
-	static const uint32 FourCC_DXT5 = static_swap<uint32>::swap<uint32('DXT5')>::value;
-	
-	//non-standard fourcc's
-	static const uint32 FourCC_PVR2 = static_swap<uint32>::swap<uint32('PVR2')>::value;
-	static const uint32 FourCC_PVR4 = static_swap<uint32>::swap<uint32('PVR4')>::value;
-	static const uint32 FourCC_ETC1 = static_swap<uint32>::swap<uint32('ETC1')>::value;
-	
 	
 	struct DDS_Pixelformat
 	{
@@ -133,6 +122,7 @@ namespace kani { namespace file {
 	using std::ios_base;
 	using std::vector;
 	using dds::DDS_Header;
+	using namespace kani::texture;
 	
 	//ref: @see http://www.codesampler.com/oglsrc/oglsrc_4.htm
 	//ref: @see http://www.racer.nl/tech/dds.htm
@@ -176,28 +166,28 @@ namespace kani { namespace file {
 			//TODO: create another enum to compute data size depending on FourCC
 			switch(ddsHeader.ddspf.dwFourCC)
 			{
-				case dds::FourCC_DXT1:
+				case FourCC_DXT1:
 					break;
 
-				case dds::FourCC_DXT2:
+				case FourCC_DXT2:
 					break;
 					
-				case dds::FourCC_DXT3:
+				case FourCC_DXT3:
 					break;
 					
-				case dds::FourCC_DXT4:
+				case FourCC_DXT4:
 					break;
 					
-				case dds::FourCC_DXT5:
+				case FourCC_DXT5:
 					break;
 					
-				case dds::FourCC_PVR2:
+				case FourCC_PVR2:
 					break;
 					
-				case dds::FourCC_PVR4:
+				case FourCC_PVR4:
 					break;
 					
-				case dds::FourCC_ETC1:
+				case FourCC_ETC1:
 					break;
 					
 				//extend for more fourCCs
