@@ -11,6 +11,7 @@
 #include "../core/kaniTypes.h"
 #include "../core/kaniEndian.h"
 #include "../texture/kaniTexFourCC.h"
+#include "../texture/kaniTexSize.h"
 
 #include <pvrtex/CPVRTexture.h>
 #include <pvrtex/CPVRTextureHeader.h>
@@ -123,6 +124,7 @@ namespace kani { namespace file {
 	using std::vector;
 	using dds::DDS_Header;
 	using namespace kani::texture;
+	using kani::texture::TextureSize;
 	
 	//ref: @see http://www.codesampler.com/oglsrc/oglsrc_4.htm
 	//ref: @see http://www.racer.nl/tech/dds.htm
@@ -159,54 +161,20 @@ namespace kani { namespace file {
 		
 		
 		pvrHeader = CPVRTextureHeader(ddsHeader.dwWidth, ddsHeader.dwHeight);
-		
-		if(ddsHeader.ddspf.dwFlags & DDPF_FOURCC)
-		{
-			//TODO: use our enum for this, extend to contain (FourCC or 0)
-			//TODO: create another enum to compute data size depending on FourCC
-			switch(ddsHeader.ddspf.dwFourCC)
-			{
-				case FourCC_DXT1:
-					break;
 
-				case FourCC_DXT2:
-					break;
-					
-				case FourCC_DXT3:
-					break;
-					
-				case FourCC_DXT4:
-					break;
-					
-				case FourCC_DXT5:
-					break;
-					
-				case FourCC_PVR2:
-					break;
-					
-				case FourCC_PVR4:
-					break;
-					
-				case FourCC_ETC1:
-					break;
-					
-				//extend for more fourCCs
-			}
-		}
-		else if()
-		{
-			
-		}
+		const TextureSize& textureSize = (ddsHeader.ddspf.dwFlags & DDPF_FOURCC) ?
+			TextureSize::getTextureSize((texture::FourCC)ddsHeader.ddspf.dwFourCC) :
+			TextureSize::getTextureSize((texture::FourCC)0);
 		
 		//compute size
 		size_t datasize = 0;
 		for(uint32 i = 0; i < ddsHeader.dwMipMapCount; ++i)
 		{
-			uint32 mipWidth		= ddsHeader.dwWidth		>> i;
-			uint32 mipHeight	= ddsHeader.dwHeight	>> i;
-			uint32 mipDepth		= ddsHeader.dwDepth		>> i;
+			//uint32 mipWidth		= ddsHeader.dwWidth		>> i;
+			//uint32 mipHeight	= ddsHeader.dwHeight	>> i;
+			//uint32 mipDepth		= ddsHeader.dwDepth		>> i;
 			//a bit more: number of surfaces, etc...
-			datasize += format.computeSize(mipWidth, mipHeight, mipDepth);
+			datasize += textureSize(ddsHeader.dwWidth, ddsHeader.dwHeight, ddsHeader.dwDepth, i, false);
 		}
 		
 		//read data

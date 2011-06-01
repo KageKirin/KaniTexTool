@@ -37,9 +37,21 @@ namespace kani { namespace texture {
 	template<FourCC fcc>
 	struct	TextureSizeImpl : TextureSize
 	{
-		virtual	int	operator()(int width, int height, int mipLevel = 0, bool padding = false) const;
-		virtual	int	operator()(int width, int height, int depth, int mipLevel = 0, bool padding = false) const;
+		virtual	int	operator()(int width, int height, int mipLevel = 0, bool padding = false) const
+		{	return -2;	}
+		virtual	int	operator()(int width, int height, int depth, int mipLevel = 0, bool padding = false) const
+		{	return -2;	}
 	};
+	
+	//----------------------------------------------------------------------
+
+	template<>
+	int	TextureSizeImpl<FourCC_DXT1>::operator()(int width, int height, int mipLevel, bool padding) const
+	{	return -2;	}
+
+	template<>
+	int	TextureSizeImpl<FourCC_DXT1>::operator()(int width, int height, int depth, int mipLevel, bool padding) const
+	{	return -2;	}
 	
 	//----------------------------------------------------------------------
 
