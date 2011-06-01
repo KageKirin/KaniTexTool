@@ -41,6 +41,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		5AB5E63C139632DE00AFA7DF /* kaniTexFourCC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kaniTexFourCC.h; path = src/kani/texture/kaniTexFourCC.h; sourceTree = "<group>"; };
 		5ADC8EC01393948F001E8B76 /* kaniTexFormat.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = kaniTexFormat.cpp; path = src/kani/texture/kaniTexFormat.cpp; sourceTree = "<group>"; };
 		5ADC8EC11393948F001E8B76 /* kaniTexFormat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kaniTexFormat.h; path = src/kani/texture/kaniTexFormat.h; sourceTree = "<group>"; };
 		5ADC8EC31393949D001E8B76 /* kaniCmdLine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = kaniCmdLine.cpp; path = src/kani/core/kaniCmdLine.cpp; sourceTree = "<group>"; };
@@ -194,6 +195,7 @@
 				5ADC8EC11393948F001E8B76 /* kaniTexFormat.h */,
 				5ADC8ECC1393954E001E8B76 /* kaniTexPixelFormat.cpp */,
 				5ADC8ECD1393954E001E8B76 /* kaniTexPixelFormat.h */,
+				5AB5E63C139632DE00AFA7DF /* kaniTexFourCC.h */,
 			);
 			name = texture;
 			sourceTree = "<group>";
