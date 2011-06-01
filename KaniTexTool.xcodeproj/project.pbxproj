@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5AB5E64013964A8200AFA7DF /* kaniTexSize.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5AB5E63E13964A8200AFA7DF /* kaniTexSize.cpp */; };
 		5ADC8EC21393948F001E8B76 /* kaniTexFormat.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5ADC8EC01393948F001E8B76 /* kaniTexFormat.cpp */; };
 		5ADC8EC51393949D001E8B76 /* kaniCmdLine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5ADC8EC31393949D001E8B76 /* kaniCmdLine.cpp */; };
 		5ADC8EC8139394AB001E8B76 /* kaniConversion.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5ADC8EC6139394AB001E8B76 /* kaniConversion.cpp */; };
@@ -42,6 +43,8 @@
 
 /* Begin PBXFileReference section */
 		5AB5E63C139632DE00AFA7DF /* kaniTexFourCC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kaniTexFourCC.h; path = src/kani/texture/kaniTexFourCC.h; sourceTree = "<group>"; };
+		5AB5E63E13964A8200AFA7DF /* kaniTexSize.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = kaniTexSize.cpp; path = src/kani/texture/kaniTexSize.cpp; sourceTree = "<group>"; };
+		5AB5E63F13964A8200AFA7DF /* kaniTexSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kaniTexSize.h; path = src/kani/texture/kaniTexSize.h; sourceTree = "<group>"; };
 		5ADC8EC01393948F001E8B76 /* kaniTexFormat.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = kaniTexFormat.cpp; path = src/kani/texture/kaniTexFormat.cpp; sourceTree = "<group>"; };
 		5ADC8EC11393948F001E8B76 /* kaniTexFormat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kaniTexFormat.h; path = src/kani/texture/kaniTexFormat.h; sourceTree = "<group>"; };
 		5ADC8EC31393949D001E8B76 /* kaniCmdLine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = kaniCmdLine.cpp; path = src/kani/core/kaniCmdLine.cpp; sourceTree = "<group>"; };
@@ -196,6 +199,8 @@
 				5ADC8ECC1393954E001E8B76 /* kaniTexPixelFormat.cpp */,
 				5ADC8ECD1393954E001E8B76 /* kaniTexPixelFormat.h */,
 				5AB5E63C139632DE00AFA7DF /* kaniTexFourCC.h */,
+				5AB5E63E13964A8200AFA7DF /* kaniTexSize.cpp */,
+				5AB5E63F13964A8200AFA7DF /* kaniTexSize.h */,
 			);
 			name = texture;
 			sourceTree = "<group>";
@@ -272,6 +277,7 @@
 				5ADC8EC8139394AB001E8B76 /* kaniConversion.cpp in Sources */,
 				5ADC8ECB139394C2001E8B76 /* kaniFileHandler.cpp in Sources */,
 				5ADC8ECE1393954E001E8B76 /* kaniTexPixelFormat.cpp in Sources */,
+				5AB5E64013964A8200AFA7DF /* kaniTexSize.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
