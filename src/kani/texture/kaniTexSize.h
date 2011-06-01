@@ -10,9 +10,19 @@
 #ifndef KANI_TEX_SIZE_H
 #define KANI_TEX_SIZE_H	1
 
-namespace kani { namespace texture {
+#include "../core/kaniTypes.h"
+#include "kaniTexFourCC.h"
 
+namespace kani { namespace texture {
 	
+	struct	TextureSize
+	{
+		virtual	int	operator()(int width, int height, int mipLevel = 0, bool padding = false) const;
+		virtual	int	operator()(int width, int height, int depth, int mipLevel = 0, bool padding = false) const;
+		
+		static const TextureSize& getTextureSize(FourCC fourCC);
+		static const TextureSize& getTextureSize(int channels, int bits);
+	};	
 	
 }}
 
