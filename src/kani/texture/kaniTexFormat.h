@@ -27,6 +27,7 @@ namespace kani { namespace texture {
 
 
 	//TODO: expand seq element to be tuple(string, pvrtexlib PixelType, ...)
+	//TODO: add squishType (int) where appliable, 0 else
 #define BITUPLE_SAME(x)		x, x
 #define DEFAULT_FORMAT_SEQ	\
 	((SameAsInput,	-1, -1, 0,	0,	0))	\

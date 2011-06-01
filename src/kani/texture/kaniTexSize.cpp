@@ -44,6 +44,9 @@ namespace kani { namespace texture {
 	};
 	
 	//----------------------------------------------------------------------
+	//TODO: implement template specialization for all FourCCs
+	//TODO: DXT5 -> DXT3 -> DXT1
+	//TODO: see code in ctc_convert for size computation
 
 	template<>
 	int	TextureSizeImpl<FourCC_DXT1>::operator()(int width, int height, int mipLevel, bool padding) const
