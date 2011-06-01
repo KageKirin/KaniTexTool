@@ -278,8 +278,11 @@ namespace kani { namespace texture {
 		int			pngFormat;
 		int			bitPerChannel;
 		uint32		order;
+		uint32		fourCC;
 		
-		TexFormatTuple(const char* t, PixelType p, Format f, int pf, int bpc, uint32 o);
+		TexFormatTuple(const char* t, PixelType p, Format f,
+					   int pf, int bpc,
+					   uint32 o, uint32 fcc);
 	};
 	
 	typedef vector<TexFormatTuple>	TexFormatTupleMap;
