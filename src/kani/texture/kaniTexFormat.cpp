@@ -7,6 +7,7 @@
 //
 
 #include "kaniTexFormat.h"
+#include "kaniTexFormatTuple.h"
 
 #include <cstring>
 #include <boost/preprocessor/stringize.hpp>
@@ -14,14 +15,6 @@
 
 namespace kani { namespace texture {
 
-	TexFormatTuple::TexFormatTuple(const char* t, PixelType p, Format f,
-								   int pf, int bpc,
-								   uint32 o, uint32 fcc):
-	text(t), pvrtex(p), format(f),
-	pngFormat(pf), bitPerChannel(bpc),
-	order(o), fourCC(fcc)
-	{
-	}
 	
 	TexFormatTupleMap s_TexFormatTupleMap;
 	

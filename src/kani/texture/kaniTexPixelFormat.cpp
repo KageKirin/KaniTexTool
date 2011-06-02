@@ -8,6 +8,7 @@
 
 #include "kaniTexPixelFormat.h"
 #include "kaniTexFormat.h"
+#include "kaniTexFormatTuple.h"
 #include <algorithm>
 
 namespace kani { namespace texture {
@@ -65,24 +66,39 @@ namespace kani { namespace texture {
 
 	};
 	
+	const TexFormatTuple& getTexFormatTuple(const char* textFormat)
+	{
+		return findTuple(Predicate_FindByText(textFormat));
+	}
+	
+	const TexFormatTuple& getTexFormatTuple(int pngFormat, int bitPerChannel)
+	{
+		return findTuple(Predicate_FindByPNGBits(pngFormat, bitPerChannel));
+	}
+	
+	const TexFormatTuple& getTexFormatTuple(PixelType pixelType)
+	{
+		return findTuple(Predicate_FindByPVRPixelFormat(pixelType));
+	}
+	
 	
 	PixelType	getSupportedPixelType(const char* textFormat)
 	{
-		const TexFormatTuple& tuple = findTuple(Predicate_FindByText(textFormat));
+		const TexFormatTuple& tuple = getTexFormatTuple(textFormat);
 		return tuple.pvrtex;
 	}
 	
 			
 	PixelType	getSupportedPixelType(int pngFormat, int bitPerChannel)
 	{
-		const TexFormatTuple& tuple = findTuple(Predicate_FindByPNGBits(pngFormat, bitPerChannel));
+		const TexFormatTuple& tuple = getTexFormatTuple(pngFormat, bitPerChannel);
 		return tuple.pvrtex;
 	}
 
 	
 	PngFormatInfo	getPngFormatInfo(PixelType pixelType)
 	{
-		const TexFormatTuple& tuple = findTuple(Predicate_FindByPVRPixelFormat(pixelType));
+		const TexFormatTuple& tuple = getTexFormatTuple(pixelType);
 		PngFormatInfo rv = { tuple.pngFormat, tuple.bitPerChannel };
 		return rv;
 	}

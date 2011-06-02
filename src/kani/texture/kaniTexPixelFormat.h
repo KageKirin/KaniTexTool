@@ -16,8 +16,12 @@
 namespace kani { namespace texture {
 	
 	using pvrtexlib::PixelType;
+	struct TexFormatTuple;
 
-	
+	const TexFormatTuple& getTexFormatTuple(const char* textFormat);
+	const TexFormatTuple& getTexFormatTuple(int pngFormat, int bitPerChannel);
+	const TexFormatTuple& getTexFormatTuple(PixelType pixelType);
+		
 	PixelType	getSupportedPixelType(const char* textFormat);
 	PixelType	getSupportedPixelType(int pngFormat, int bitPerChannel);
 	

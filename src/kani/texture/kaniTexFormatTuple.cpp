@@ -3,7 +3,21 @@
 //  KaniTexTool
 //
 //  Created by Christian Helmich on 03.06.11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Copyright 2011 KageKirin. All rights reserved.
 //
 
 #include "kaniTexFormatTuple.h"
+
+namespace kani { namespace texture {
+
+
+	TexFormatTuple::TexFormatTuple(const char* t, PixelType p, Format f,
+								   int pf, int bpc,
+								   uint32 o, uint32 fcc):
+	text(t), pvrtex(p), format(f),
+	pngFormat(pf), bitPerChannel(bpc),
+	order(o), fourCC(fcc)
+	{
+	}
+	
+}}

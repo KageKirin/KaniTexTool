@@ -7,15 +7,20 @@
 //
 
 #include "kaniTexSize.h"
-
 #include "kaniTexFourCC.h"
+
+#include <pvrtex/CPVRTextureHeader.h>
 #include <map>
+#include <vector>
 #include <algorithm>
 
 namespace kani { namespace texture {
 
 	using std::map;
+	using std::vector;
 	using std::find_if;
+	using std::max;
+	using std::min;
 	
 	//----------------------------------------------------------------------
 
@@ -38,23 +43,107 @@ namespace kani { namespace texture {
 	struct	TextureSizeImpl : TextureSize
 	{
 		virtual	int	operator()(int width, int height, int mipLevel = 0, bool padding = false) const
-		{	return -2;	}
+		{
+			return -2;
+		}
+		
 		virtual	int	operator()(int width, int height, int depth, int mipLevel = 0, bool padding = false) const
-		{	return -2;	}
+		{
+			int mipDepth	= depth		>> mipLevel;
+			return (*this)(width, height, mipLevel, padding) * mipDepth;
+		}
 	};
 	
 	//----------------------------------------------------------------------
 	//TODO: implement template specialization for all FourCCs
 	//TODO: DXT5 -> DXT3 -> DXT1
-	//TODO: see code in ctc_convert for size computation
 
 	template<>
 	int	TextureSizeImpl<FourCC_DXT1>::operator()(int width, int height, int mipLevel, bool padding) const
-	{	return -2;	}
+	{	
+		int mipWidth	= width		>> mipLevel;
+		int mipHeight	= height	>> mipLevel;
+		
+		int blockcount = ((mipWidth + 3) / 4) * ((mipHeight + 3) / 4);
+		int blocksize = 8;
+		return blockcount * blocksize;		
+	}
 
 	template<>
-	int	TextureSizeImpl<FourCC_DXT1>::operator()(int width, int height, int depth, int mipLevel, bool padding) const
-	{	return -2;	}
+	int	TextureSizeImpl<FourCC_DXT2>::operator()(int width, int height, int mipLevel, bool padding) const
+	{	
+		int mipWidth	= width		>> mipLevel;
+		int mipHeight	= height	>> mipLevel;
+
+		int blockcount = ((mipWidth + 3) / 4) * ((mipHeight + 3) / 4);
+		int blocksize = 16;
+		return blockcount * blocksize;
+	}
+
+	template<>
+	int	TextureSizeImpl<FourCC_DXT3>::operator()(int width, int height, int mipLevel, bool padding) const
+	{	
+		int mipWidth	= width		>> mipLevel;
+		int mipHeight	= height	>> mipLevel;
+
+		int blockcount = ((mipWidth + 3) / 4) * ((mipHeight + 3) / 4);
+		int blocksize = 16;
+		return blockcount * blocksize;
+	}
+
+	template<>
+	int	TextureSizeImpl<FourCC_DXT4>::operator()(int width, int height, int mipLevel, bool padding) const
+	{	
+		int mipWidth	= width		>> mipLevel;
+		int mipHeight	= height	>> mipLevel;
+
+		int blockcount = ((mipWidth + 3) / 4) * ((mipHeight + 3) / 4);
+		int blocksize = 16;
+		return blockcount * blocksize;
+	}
+
+	template<>
+	int	TextureSizeImpl<FourCC_DXT5>::operator()(int width, int height, int mipLevel, bool padding) const
+	{	
+		int mipWidth	= width		>> mipLevel;
+		int mipHeight	= height	>> mipLevel;
+
+		int blockcount = ((mipWidth + 3) / 4) * ((mipHeight + 3) / 4);
+		int blocksize = 16;
+		return blockcount * blocksize;
+	}
+
+	
+	//----------------------------------------------------------------------
+
+	template<>
+	int	TextureSizeImpl<FourCC_PVR2>::operator()(int width, int height, int mipLevel, bool padding) const
+	{	
+		int mipWidth	= width		>> mipLevel;
+		int mipHeight	= height	>> mipLevel;
+		return max(mipWidth * mipHeight / 2, 32);
+	}
+
+	template<>
+	int	TextureSizeImpl<FourCC_PVR4>::operator()(int width, int height, int mipLevel, bool padding) const
+	{	
+		int mipWidth	= width		>> mipLevel;
+		int mipHeight	= height	>> mipLevel;
+		return max(mipWidth * mipHeight / 2, 32);
+	}
+	
+	
+	
+	template<>
+	int	TextureSizeImpl<FourCC_ETC1>::operator()(int width, int height, int mipLevel, bool padding) const
+	{	
+		int mipWidth	= width		>> mipLevel;
+		int mipHeight	= height	>> mipLevel;
+		
+		pvrtexlib::CPVRTextureHeader pvrHeader(mipWidth, mipHeight);
+		pvrHeader.setPixelType(pvrtexlib::ETC_RGB_4BPP);
+		return (int)pvrHeader.getSurfaceSize();
+	}
 	
 	//----------------------------------------------------------------------
 
@@ -76,6 +165,7 @@ namespace kani { namespace texture {
 		static bool initDone = false;
 		if(!initDone)
 		{
+			s_FourCCTextureSizeMap.clear();
 			BOOST_PP_SEQ_FOR_EACH(M_CREATE_FOURCCMAP, s_TextureSize_FourCC_, FOURCC_SEQ)
 			initDone = true;
 		}		
@@ -104,10 +194,33 @@ namespace kani { namespace texture {
 		int bits;		
 	};
 	
+	struct	TextureSizeUncompressed : TextureSize
+	{
+		ChannelInfo	channelInfo;
+		
+		TextureSizeUncompressed(ChannelInfo& ci):
+		channelInfo(ci)
+		{}
 	
-	typedef map<ChannelInfo, TextureSize*>	ChannelInfoTextureSizeMap;
-	static	ChannelInfoTextureSizeMap		s_ChannelInfoTextureSizeMap;
 	
+		virtual	int	operator()(int width, int height, int mipLevel = 0, bool padding = false) const
+		{
+			int mipWidth	= width		>> mipLevel;
+			int mipHeight	= height	>> mipLevel;
+			
+			return mipWidth * mipHeight * channelInfo.channels * channelInfo.bits;
+		}
+		
+		virtual	int	operator()(int width, int height, int depth, int mipLevel = 0, bool padding = false) const
+		{
+			int mipDepth	= depth		>> mipLevel;
+			return (*this)(width, height, mipLevel, padding) * mipDepth;
+		}
+	};
+	
+	
+	typedef vector<TextureSizeUncompressed>		ChannelInfoTextureSizeMap;
+		
 	struct Pred_ChannelInfo
 	{
 		int channels;
@@ -115,20 +228,46 @@ namespace kani { namespace texture {
 		
 		Pred_ChannelInfo(int c, int b):channels(c),bits(b){}
 		
-		bool operator()(ChannelInfoTextureSizeMap::value_type& val)
+		bool operator()(TextureSizeUncompressed& val)
 		{
-			return	(val.first.channels == channels)
-				&&	(val.first.bits == bits);
+			return	(val.channelInfo.channels == channels)
+				&&	(val.channelInfo.bits == bits);
 		}
 	};
 	
+	ChannelInfoTextureSizeMap&	getChannelInfoTextureSizeMap()
+	{
+		static	ChannelInfoTextureSizeMap		s_ChannelInfoTextureSizeMap;
+		
+		static bool initDone = false;
+		if(!initDone)
+		{
+			s_ChannelInfoTextureSizeMap.clear();
+			ChannelInfo	channelInfo;
+
+			for(channelInfo.channels = 1; channelInfo.channels <= 4; ++channelInfo.channels)
+			{
+				for(channelInfo.bits = 1; channelInfo.bits <= 32; channelInfo.bits <<= 1)
+				{
+					s_ChannelInfoTextureSizeMap.push_back(TextureSizeUncompressed(channelInfo));
+				}
+			}
+			initDone = true;
+		}		
+		
+		return s_ChannelInfoTextureSizeMap;
+	}
+
+	
 	const TextureSize& TextureSize::getTextureSize(int channels, int bits)
 	{
-		ChannelInfoTextureSizeMap::iterator iter = find_if(s_ChannelInfoTextureSizeMap.begin(),
-													  s_ChannelInfoTextureSizeMap.end(),
-													  Pred_ChannelInfo(channels, bits));
-		if(iter != s_ChannelInfoTextureSizeMap.end())
-			return *(iter->second);
+		ChannelInfoTextureSizeMap&	channelInfoTextureSizeMap = getChannelInfoTextureSizeMap();
+
+		ChannelInfoTextureSizeMap::iterator iter = find_if(	channelInfoTextureSizeMap.begin(),
+															channelInfoTextureSizeMap.end(),
+															Pred_ChannelInfo(channels, bits));
+		if(iter != channelInfoTextureSizeMap.end())
+			return *iter;
 
 		return	s_DefaultTextureSize;
 	}

@@ -23,8 +23,6 @@
 namespace kani { namespace texture {
 
 	using pvrtexlib::PixelType;
-	using std::vector;
-
 
 	//TODO: expand seq element to be tuple(string, pvrtexlib PixelType, ...)
 	//TODO: add squishType (int) where appliable, 0 else
@@ -271,23 +269,6 @@ namespace kani { namespace texture {
 	};
 #undef M_CAT	
 
-	struct TexFormatTuple
-	{
-		const char*	text;
-		PixelType	pvrtex;
-		Format		format;
-		int			pngFormat;
-		int			bitPerChannel;
-		uint32		order;
-		uint32		fourCC;
-		
-		TexFormatTuple(const char* t, PixelType p, Format f,
-					   int pf, int bpc,
-					   uint32 o, uint32 fcc);
-	};
-	
-	typedef vector<TexFormatTuple>	TexFormatTupleMap;
-	void createTexFormatTupleMap();
 }}
 
 #endif	//KANI_TEX_FORMAT
