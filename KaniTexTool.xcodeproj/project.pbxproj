@@ -13,6 +13,7 @@
 		5ADC8EC8139394AB001E8B76 /* kaniConversion.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5ADC8EC6139394AB001E8B76 /* kaniConversion.cpp */; };
 		5ADC8ECB139394C2001E8B76 /* kaniFileHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5ADC8EC9139394C2001E8B76 /* kaniFileHandler.cpp */; };
 		5ADC8ECE1393954E001E8B76 /* kaniTexPixelFormat.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5ADC8ECC1393954E001E8B76 /* kaniTexPixelFormat.cpp */; };
+		83249E8113984A7000F70B41 /* kaniTexFormatTuple.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83249E7F13984A6F00F70B41 /* kaniTexFormatTuple.cpp */; };
 		837829FE13929AE70029B412 /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 837829FD13929AE70029B412 /* libz.1.2.5.dylib */; };
 		83B3E178139437F300F12CA6 /* libpng.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83B3E175139437F300F12CA6 /* libpng.framework */; };
 		83B3E179139437F300F12CA6 /* squish.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83B3E176139437F300F12CA6 /* squish.framework */; };
@@ -55,6 +56,8 @@
 		5ADC8ECA139394C2001E8B76 /* kaniFileHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kaniFileHandler.h; path = src/kani/file/kaniFileHandler.h; sourceTree = "<group>"; };
 		5ADC8ECC1393954E001E8B76 /* kaniTexPixelFormat.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = kaniTexPixelFormat.cpp; path = src/kani/texture/kaniTexPixelFormat.cpp; sourceTree = "<group>"; };
 		5ADC8ECD1393954E001E8B76 /* kaniTexPixelFormat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kaniTexPixelFormat.h; path = src/kani/texture/kaniTexPixelFormat.h; sourceTree = "<group>"; };
+		83249E7F13984A6F00F70B41 /* kaniTexFormatTuple.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = kaniTexFormatTuple.cpp; path = src/kani/texture/kaniTexFormatTuple.cpp; sourceTree = "<group>"; };
+		83249E8013984A6F00F70B41 /* kaniTexFormatTuple.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kaniTexFormatTuple.h; path = src/kani/texture/kaniTexFormatTuple.h; sourceTree = "<group>"; };
 		83724B0F13772BA500391D7B /* KaniTexTool */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = KaniTexTool; sourceTree = BUILT_PRODUCTS_DIR; };
 		837829FD13929AE70029B412 /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = ../../../../../opt/local/lib/libz.1.2.5.dylib; sourceTree = "<group>"; };
 		83B3E175139437F300F12CA6 /* libpng.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = libpng.framework; path = "addtional-libs/Library/Frameworks/libpng.framework"; sourceTree = "<group>"; };
@@ -196,6 +199,8 @@
 			children = (
 				5ADC8EC01393948F001E8B76 /* kaniTexFormat.cpp */,
 				5ADC8EC11393948F001E8B76 /* kaniTexFormat.h */,
+				83249E7F13984A6F00F70B41 /* kaniTexFormatTuple.cpp */,
+				83249E8013984A6F00F70B41 /* kaniTexFormatTuple.h */,
 				5ADC8ECC1393954E001E8B76 /* kaniTexPixelFormat.cpp */,
 				5ADC8ECD1393954E001E8B76 /* kaniTexPixelFormat.h */,
 				5AB5E63C139632DE00AFA7DF /* kaniTexFourCC.h */,
@@ -278,6 +283,7 @@
 				5ADC8ECB139394C2001E8B76 /* kaniFileHandler.cpp in Sources */,
 				5ADC8ECE1393954E001E8B76 /* kaniTexPixelFormat.cpp in Sources */,
 				5AB5E64013964A8200AFA7DF /* kaniTexSize.cpp in Sources */,
+				83249E8113984A7000F70B41 /* kaniTexFormatTuple.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
