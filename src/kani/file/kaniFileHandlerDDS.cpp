@@ -12,6 +12,7 @@
 #include "../core/kaniEndian.h"
 #include "../texture/kaniTexFourCC.h"
 #include "../texture/kaniTexSize.h"
+#include "../texture/kaniTexFormatTuple.h"
 
 #include <pvrtex/CPVRTexture.h>
 #include <pvrtex/CPVRTextureHeader.h>
@@ -125,7 +126,8 @@ namespace kani { namespace file {
 	using dds::DDS_Header;
 	using namespace kani::texture;
 	using kani::texture::TextureSize;
-	
+	using kani::texture::TexFormatTuple;
+		
 	//ref: @see http://www.codesampler.com/oglsrc/oglsrc_4.htm
 	//ref: @see http://www.racer.nl/tech/dds.htm
 	//ref: @see http://www.mindcontrol.org/~hplus/graphics/dds-info/
@@ -170,9 +172,6 @@ namespace kani { namespace file {
 		size_t datasize = 0;
 		for(uint32 i = 0; i < ddsHeader.dwMipMapCount; ++i)
 		{
-			//uint32 mipWidth		= ddsHeader.dwWidth		>> i;
-			//uint32 mipHeight	= ddsHeader.dwHeight	>> i;
-			//uint32 mipDepth		= ddsHeader.dwDepth		>> i;
 			//a bit more: number of surfaces, etc...
 			datasize += textureSize(ddsHeader.dwWidth, ddsHeader.dwHeight, ddsHeader.dwDepth, i, false);
 		}
@@ -192,7 +191,46 @@ namespace kani { namespace file {
 	template<>
 	int FileHandlerImpl<FileType_DDS>::internal_write(const string& filename, const CPVRTextureHeader& pvrHeader, const CPVRTextureData& pvrData) const
 	{
-		return -5;
+		//fill DDS header from PVR header
+		DDS_Header ddsHeader;
+		memset(&ddsHeader, 0, sizeof(DDS_Header));
+		ddsHeader.dwSign = dds::DDS_Sign;
+		ddsHeader.dwSign = sizeof(DDS_Header);
+		ddsHeader.ddspf.dwSize = sizeof(dds::DDS_Pixelformat);
+		
+		ddsHeader.dwWidth = pvrHeader.getWidth();
+		ddsHeader.dwHeight = pvrHeader.getHeight();
+		ddsHeader.dwDepth = pvrHeader.getNumSurfaces();
+		ddsHeader.dwMipMapCount = pvrHeader.getMipMapCount();
+		
+		pvrtexlib::PixelType pt = pvrHeader.getPixelType();
+		const TexFormatTuple& tfTuple = texture::getTexFormatTuple(pt);
+		
+		if(tfTuple.fourCC)
+		{
+			ddsHeader.ddspf.dwFlags &= DDPF_FOURCC;
+			ddsHeader.ddspf.dwFourCC = tfTuple.fourCC;
+		}
+		else
+		{
+			//set color mask
+		}
+				
+		size_t dataSize = pvrData.getDataSize();
+		
+		//write
+		ofstream file(filename.c_str(), ios_base::out | ios_base::binary);
+		assert(file.is_open());
+		if(!file.is_open())
+			return -2;
+		
+		file.write(ddsHeader.data, sizeof(DDS_Header));
+		file.write((char*)pvrData.getData(), dataSize);
+		
+		int writtenBytes = (int)(sizeof(DDS_Header) + dataSize);
+		file.close();
+		
+		return writtenBytes;
 	}
 
 	
