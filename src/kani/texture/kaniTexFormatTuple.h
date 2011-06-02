@@ -25,13 +25,13 @@ namespace kani { namespace texture {
 	{
 		const char*	text;
 		PixelType	pvrtex;
-		Format		format;
+		uint32		format;
 		int			pngFormat;
 		int			bitPerChannel;
 		uint32		order;
 		uint32		fourCC;
 		
-		TexFormatTuple(const char* t, PixelType p, Format f,
+		TexFormatTuple(const char* t, PixelType p, uint32 f,
 					   int pf, int bpc,
 					   uint32 o, uint32 fcc);
 	};

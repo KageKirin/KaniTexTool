@@ -13,6 +13,7 @@
 #include "../texture/kaniTexFourCC.h"
 #include "../texture/kaniTexSize.h"
 #include "../texture/kaniTexFormatTuple.h"
+#include "../texture/kaniTexPixelFormat.h"
 
 #include <pvrtex/CPVRTexture.h>
 #include <pvrtex/CPVRTextureHeader.h>

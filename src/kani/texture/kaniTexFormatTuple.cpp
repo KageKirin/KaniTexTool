@@ -11,7 +11,7 @@
 namespace kani { namespace texture {
 
 
-	TexFormatTuple::TexFormatTuple(const char* t, PixelType p, Format f,
+	TexFormatTuple::TexFormatTuple(const char* t, PixelType p, uint32 f,
 								   int pf, int bpc,
 								   uint32 o, uint32 fcc):
 	text(t), pvrtex(p), format(f),
