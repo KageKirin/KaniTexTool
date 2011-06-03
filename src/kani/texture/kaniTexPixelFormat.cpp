@@ -49,6 +49,28 @@ namespace kani { namespace texture {
 		}
 	};
 	
+	struct Predicate_FindByOrder
+	{
+		uint32	order;
+		
+		Predicate_FindByOrder(uint32 o):order(o){}		
+		bool operator()(const TexFormatTuple& tuple)
+		{
+			return (order == tuple.order);
+		}
+	};
+	
+	struct Predicate_FindByFourCC
+	{
+		uint32	fourCC;
+		
+		Predicate_FindByFourCC(uint32 fcc):fourCC(fcc){}		
+		bool operator()(const TexFormatTuple& tuple)
+		{
+			return (fourCC == tuple.fourCC);
+		}
+	};
+	
 	struct Predicate_FindByPNGBits
 	{
 		int	pngFormat;
@@ -63,7 +85,6 @@ namespace kani { namespace texture {
 			return	(pngFormat == tuple.pngFormat)
 				&&	(bitPerChannel == tuple.bitPerChannel);
 		}
-
 	};
 	
 	const TexFormatTuple& getTexFormatTuple(const char* textFormat)
@@ -81,6 +102,12 @@ namespace kani { namespace texture {
 		return findTuple(Predicate_FindByPVRPixelFormat(pixelType));
 	}
 	
+	const TexFormatTuple& getTexFormatTuple(uint32 order)
+	{
+		return findTuple(Predicate_FindByOrder(order));
+	}
+
+	
 	
 	PixelType	getSupportedPixelType(const char* textFormat)
 	{
@@ -94,6 +121,13 @@ namespace kani { namespace texture {
 		const TexFormatTuple& tuple = getTexFormatTuple(pngFormat, bitPerChannel);
 		return tuple.pvrtex;
 	}
+	
+	PixelType	getSupportedPixelType(uint32 fourCC)
+	{
+		const TexFormatTuple& tuple =  findTuple(Predicate_FindByFourCC(fourCC));
+		return tuple.pvrtex;
+	}
+
 
 	
 	PngFormatInfo	getPngFormatInfo(PixelType pixelType)
@@ -101,6 +135,72 @@ namespace kani { namespace texture {
 		const TexFormatTuple& tuple = getTexFormatTuple(pixelType);
 		PngFormatInfo rv = { tuple.pngFormat, tuple.bitPerChannel };
 		return rv;
+	}
+	
+	PixelType	getPixelTypeForMask(uint32 rMask, uint32 gMask, uint32 bMask, uint32 aMask)
+	{
+		uint32 order = 0;
+		if(rMask & 0xFFFF && gMask & 0xFFFF && bMask & 0xFFFF && aMask & 0xFFFF)
+		{
+			for(int i = 0; i < 4; ++i)
+			{
+				if(rMask & (0xF000 >> i))
+					order &= 'R' << ((3 - i) * 2);
+
+				if(gMask & (0xF000 >> i))
+					order &= 'G' << ((3 - i) * 2);
+				
+				if(bMask & (0xF000 >> i))
+					order &= 'B' << ((3 - i) * 2);
+				
+				if(aMask & (0xF000 >> i))
+					order &= 'A' << ((3 - i) * 2);
+			}
+			
+		}
+		else if(rMask & 0xFFFFFFFF && gMask & 0xFFFFFFFF && bMask & 0xFFFFFFFF && aMask & 0xFFFFFFFF)
+		{
+			for(int i = 0; i < 4; ++i)
+			{
+				if(rMask & (0xFF000000 >> i))
+					order &= 'R' << ((3 - i) * 4);
+				
+				if(gMask & (0xFF000000 >> i))
+					order &= 'G' << ((3 - i) * 4);
+				
+				if(bMask & (0xFF000000 >> i))
+					order &= 'B' << ((3 - i) * 4);
+				
+				if(aMask & (0xFF000000 >> i))
+					order &= 'A' << ((3 - i) * 4);
+			}
+		}
+		const TexFormatTuple& tuple = getTexFormatTuple(order);
+		return tuple.pvrtex;
+	}
+	
+	void	getMaskForPixelType(PixelType pt, uint32* rMask, uint32* gMask, uint32* bMask, uint32* aMask)
+	{
+		const TexFormatTuple& tuple = getTexFormatTuple(pt);
+		*rMask = 0;
+		*gMask = 0;
+		*bMask = 0;
+		*aMask = 0;
+		
+		for(int i = 0; i < 4; ++i)
+		{
+			if(tuple.order & ('R' << ((3 - i) * 4)))
+				*rMask &= 0xFF000000 >> i;
+			
+			if(tuple.order & ('G' << ((3 - i) * 4)))
+				*gMask &= 0xFF000000 >> i;
+			
+			if(tuple.order & ('B' << ((3 - i) * 4)))
+				*bMask &= 0xFF000000 >> i;
+			
+			if(tuple.order & ('A' << ((3 - i) * 4)))
+				*aMask &= 0xFF000000 >> i;
+		}
 	}
 }}
 
