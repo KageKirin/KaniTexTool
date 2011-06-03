@@ -49,7 +49,7 @@ namespace kani { namespace texture {
 		
 		virtual	int	operator()(int width, int height, int depth, int mipLevel = 0, bool padding = false) const
 		{
-			int mipDepth	= depth		>> mipLevel;
+			int mipDepth	= max(depth		>> mipLevel, 1);
 			return (*this)(width, height, mipLevel, padding) * mipDepth;
 		}
 	};
@@ -61,8 +61,8 @@ namespace kani { namespace texture {
 	template<>
 	int	TextureSizeImpl<FourCC_DXT1>::operator()(int width, int height, int mipLevel, bool padding) const
 	{	
-		int mipWidth	= width		>> mipLevel;
-		int mipHeight	= height	>> mipLevel;
+		int mipWidth	= max(width		>> mipLevel, 1);
+		int mipHeight	= max(height	>> mipLevel, 1);
 		
 		int blockcount = ((mipWidth + 3) / 4) * ((mipHeight + 3) / 4);
 		int blocksize = 8;
@@ -72,8 +72,8 @@ namespace kani { namespace texture {
 	template<>
 	int	TextureSizeImpl<FourCC_DXT2>::operator()(int width, int height, int mipLevel, bool padding) const
 	{	
-		int mipWidth	= width		>> mipLevel;
-		int mipHeight	= height	>> mipLevel;
+		int mipWidth	= max(width		>> mipLevel, 1);
+		int mipHeight	= max(height	>> mipLevel, 1);
 
 		int blockcount = ((mipWidth + 3) / 4) * ((mipHeight + 3) / 4);
 		int blocksize = 16;
@@ -83,8 +83,8 @@ namespace kani { namespace texture {
 	template<>
 	int	TextureSizeImpl<FourCC_DXT3>::operator()(int width, int height, int mipLevel, bool padding) const
 	{	
-		int mipWidth	= width		>> mipLevel;
-		int mipHeight	= height	>> mipLevel;
+		int mipWidth	= max(width		>> mipLevel, 1);
+		int mipHeight	= max(height	>> mipLevel, 1);
 
 		int blockcount = ((mipWidth + 3) / 4) * ((mipHeight + 3) / 4);
 		int blocksize = 16;
@@ -94,8 +94,8 @@ namespace kani { namespace texture {
 	template<>
 	int	TextureSizeImpl<FourCC_DXT4>::operator()(int width, int height, int mipLevel, bool padding) const
 	{	
-		int mipWidth	= width		>> mipLevel;
-		int mipHeight	= height	>> mipLevel;
+		int mipWidth	= max(width		>> mipLevel, 1);
+		int mipHeight	= max(height	>> mipLevel, 1);
 
 		int blockcount = ((mipWidth + 3) / 4) * ((mipHeight + 3) / 4);
 		int blocksize = 16;
@@ -105,8 +105,8 @@ namespace kani { namespace texture {
 	template<>
 	int	TextureSizeImpl<FourCC_DXT5>::operator()(int width, int height, int mipLevel, bool padding) const
 	{	
-		int mipWidth	= width		>> mipLevel;
-		int mipHeight	= height	>> mipLevel;
+		int mipWidth	= max(width		>> mipLevel, 1);
+		int mipHeight	= max(height	>> mipLevel, 1);
 
 		int blockcount = ((mipWidth + 3) / 4) * ((mipHeight + 3) / 4);
 		int blocksize = 16;
@@ -119,16 +119,18 @@ namespace kani { namespace texture {
 	template<>
 	int	TextureSizeImpl<FourCC_PVR2>::operator()(int width, int height, int mipLevel, bool padding) const
 	{	
-		int mipWidth	= width		>> mipLevel;
-		int mipHeight	= height	>> mipLevel;
+		int mipWidth	= max(width		>> mipLevel, 1);
+		int mipHeight	= max(height	>> mipLevel, 1);
+
 		return max(mipWidth * mipHeight / 2, 32);
 	}
 
 	template<>
 	int	TextureSizeImpl<FourCC_PVR4>::operator()(int width, int height, int mipLevel, bool padding) const
 	{	
-		int mipWidth	= width		>> mipLevel;
-		int mipHeight	= height	>> mipLevel;
+		int mipWidth	= max(width		>> mipLevel, 1);
+		int mipHeight	= max(height	>> mipLevel, 1);
+
 		return max(mipWidth * mipHeight / 2, 32);
 	}
 	
@@ -137,8 +139,8 @@ namespace kani { namespace texture {
 	template<>
 	int	TextureSizeImpl<FourCC_ETC1>::operator()(int width, int height, int mipLevel, bool padding) const
 	{	
-		int mipWidth	= width		>> mipLevel;
-		int mipHeight	= height	>> mipLevel;
+		int mipWidth	= max(width		>> mipLevel, 1);
+		int mipHeight	= max(height	>> mipLevel, 1);
 		
 		pvrtexlib::CPVRTextureHeader pvrHeader(mipWidth, mipHeight);
 		pvrHeader.setPixelType(pvrtexlib::ETC_RGB_4BPP);
