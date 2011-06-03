@@ -317,6 +317,14 @@
 				</File>
 			</Filter>
 		</Filter>
+		<Filter
+			Name="Libs"
+			>
+			<File
+				RelativePath=".\addtional-libs\pvrtex\lib\Windows_x86_32\PVRTexLib.lib"
+				>
+			</File>
+		</Filter>
 		<File
 			RelativePath=".\src\main.cpp"
 			>
