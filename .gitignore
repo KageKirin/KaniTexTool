@@ -7,3 +7,7 @@ xcuserdata
 *.xcuserdatad
 *.xcuserstate
 *.xcscheme
+*.suo
+*.ncb
+
+*.vcproj.*.*.user
