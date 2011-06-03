@@ -6,6 +6,7 @@
 //  Copyright 2011 KageKirin. All rights reserved.
 //
 
+#include "stdafx.h"
 #include "kaniConversion.h"
 
 namespace kani { namespace texture {
