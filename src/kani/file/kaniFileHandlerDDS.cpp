@@ -163,18 +163,34 @@ namespace kani { namespace file {
 			return -3;
 		
 		
-		pvrHeader = CPVRTextureHeader(ddsHeader.dwWidth, ddsHeader.dwHeight);
+		pvrHeader = CPVRTextureHeader((ddsHeader.dwFlags & DDSD_WIDTH)	? ddsHeader.dwWidth : 1, 
+									  (ddsHeader.dwFlags & DDSD_HEIGHT)	? ddsHeader.dwHeight : 1);
 
+		uint32 mips = (ddsHeader.dwFlags & DDSD_MIPMAPCOUNT) ? ddsHeader.dwMipMapCount : 1;
+		pvrHeader.setMipMapCount(mips);
+		
+		PixelType pt = (ddsHeader.ddspf.dwFlags & DDPF_FOURCC) ? 
+			getSupportedPixelType(ddsHeader.ddspf.dwFourCC) :
+			getPixelTypeForMask(ddsHeader.ddspf.dwRBitMask, ddsHeader.ddspf.dwGBitMask, ddsHeader.ddspf.dwBBitMask, ddsHeader.ddspf.dwABitMask);
+		pvrHeader.setPixelType(pt);
+		
+		pvrHeader.setVolume(ddsHeader.ddsc.dwCaps2  & DDSCAPS2_VOLUME);
+		pvrHeader.setCubeMap(ddsHeader.ddsc.dwCaps2 & DDSCAPS2_CUBEMAP);
+
+		assert(!(ddsHeader.ddspf.dwFlags & DDPF_INDEXED));	//we don't support INDEXED atm
 		const TextureSize& textureSize = (ddsHeader.ddspf.dwFlags & DDPF_FOURCC) ?
 			TextureSize::getTextureSize((texture::FourCC)ddsHeader.ddspf.dwFourCC) :
-			TextureSize::getTextureSize((texture::FourCC)0);
+			(ddsHeader.ddspf.dwFlags & (DDPF_RGB | DDPF_ALPHAPIXELS)) ?
+			 TextureSize::getTextureSize(4, ddsHeader.ddspf.dwRGBBitCount) :
+			 TextureSize::getTextureSize(3, ddsHeader.ddspf.dwRGBBitCount);
 		
 		//compute size
 		size_t datasize = 0;
-		for(uint32 i = 0; i < ddsHeader.dwMipMapCount; ++i)
+		int depth = (ddsHeader.dwFlags & DDSD_DEPTH) ? ddsHeader.dwDepth : 1;
+		for(uint32 i = 0; i < mips; ++i)
 		{
 			//a bit more: number of surfaces, etc...
-			datasize += textureSize(ddsHeader.dwWidth, ddsHeader.dwHeight, ddsHeader.dwDepth, i, false);
+			datasize += textureSize(ddsHeader.dwWidth, ddsHeader.dwHeight, depth, i, false);
 		}
 		
 		//read data
@@ -198,11 +214,23 @@ namespace kani { namespace file {
 		ddsHeader.dwSign = dds::DDS_Sign;
 		ddsHeader.dwSign = sizeof(DDS_Header);
 		ddsHeader.ddspf.dwSize = sizeof(dds::DDS_Pixelformat);
+		ddsHeader.dwFlags = DDSD_PIXELFORMAT & DDSD_CAPS;
 		
 		ddsHeader.dwWidth = pvrHeader.getWidth();
+		ddsHeader.dwFlags &= DDSD_WIDTH;
+		
 		ddsHeader.dwHeight = pvrHeader.getHeight();
+		ddsHeader.dwFlags &= DDSD_HEIGHT;
+		
 		ddsHeader.dwDepth = pvrHeader.getNumSurfaces();
 		ddsHeader.dwMipMapCount = pvrHeader.getMipMapCount();
+		if(ddsHeader.dwMipMapCount)
+			ddsHeader.dwFlags &= DDSD_MIPMAPCOUNT;
+		if(pvrHeader.isVolume())
+			ddsHeader.ddsc.dwCaps2 &= DDSCAPS2_VOLUME;
+		if(pvrHeader.isCubeMap())
+			ddsHeader.ddsc.dwCaps2 &= DDSCAPS2_CUBEMAP;
+
 		
 		pvrtexlib::PixelType pt = pvrHeader.getPixelType();
 		const TexFormatTuple& tfTuple = texture::getTexFormatTuple(pt);
@@ -212,11 +240,20 @@ namespace kani { namespace file {
 			ddsHeader.ddspf.dwFlags &= DDPF_FOURCC;
 			ddsHeader.ddspf.dwFourCC = tfTuple.fourCC;
 		}
-		else
+		else 
 		{
+			ddsHeader.ddspf.dwFlags &= DDPF_RGB;
+			if(pvrHeader.hasAlpha())
+			{
+				ddsHeader.ddspf.dwFlags &= DDPF_ALPHAPIXELS;			
+			}
+
 			//set color mask
+			getMaskForPixelType(tfTuple.pvrtex, 
+								&ddsHeader.ddspf.dwRBitMask, &ddsHeader.ddspf.dwGBitMask, 
+								&ddsHeader.ddspf.dwBBitMask, &ddsHeader.ddspf.dwABitMask);
 		}
-				
+		
 		size_t dataSize = pvrData.getDataSize();
 		
 		//write
