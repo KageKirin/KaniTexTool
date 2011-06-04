@@ -62,6 +62,9 @@
 			<Tool
 				Name="VCLinkerTool"
 				LinkIncremental="2"
+				AdditionalLibraryDirectories="addtional-libs/boost/lib;"
+				IgnoreAllDefaultLibraries="false"
+				IgnoreDefaultLibraryNames="libcmtd.lib"
 				GenerateDebugInformation="true"
 				SubSystem="1"
 				TargetMachine="1"
@@ -135,6 +138,9 @@
 			<Tool
 				Name="VCLinkerTool"
 				LinkIncremental="1"
+				AdditionalLibraryDirectories="addtional-libs/boost/lib;"
+				IgnoreAllDefaultLibraries="false"
+				IgnoreDefaultLibraryNames="libcmt.lib"
 				GenerateDebugInformation="true"
 				SubSystem="1"
 				OptimizeReferences="2"
@@ -322,10 +328,6 @@
 		<Filter
 			Name="Libs"
 			>
-			<File
-				RelativePath=".\addtional-libs\boost\lib\libboost_program_options-vc90-mt-gd-1_46_1.lib"
-				>
-			</File>
 			<File
 				RelativePath=".\addtional-libs\libpng\lib\libpng.lib"
 				>
