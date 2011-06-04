@@ -6,7 +6,7 @@
 //  Copyright 2011 KageKirin. All rights reserved.
 //
 
-#include "stdafx.h"
+//#include "stdafx.h"
 #include "kaniFileHandlerPVR.h"
 #include <pvrtex/CPVRTexture.h>
 #include <pvrtex/CPVRTextureHeader.h>
@@ -27,19 +27,19 @@ namespace kani { namespace file {
 	
 	struct _PVRTexHeader
 	{
-		uint32_t headerLength;
-		uint32_t height;
-		uint32_t width;
-		uint32_t numMipmaps;
-		uint32_t flags;
-		uint32_t dataLength;
-		uint32_t bpp;
-		uint32_t bitmaskRed;
-		uint32_t bitmaskGreen;
-		uint32_t bitmaskBlue;
-		uint32_t bitmaskAlpha;
-		uint32_t pvrTag;
-		uint32_t numSurfs;
+		uint32 headerLength;
+		uint32 height;
+		uint32 width;
+		uint32 numMipmaps;
+		uint32 flags;
+		uint32 dataLength;
+		uint32 bpp;
+		uint32 bitmaskRed;
+		uint32 bitmaskGreen;
+		uint32 bitmaskBlue;
+		uint32 bitmaskAlpha;
+		uint32 pvrTag;
+		uint32 numSurfs;
 	};
 	
 	//CPVRTexture 

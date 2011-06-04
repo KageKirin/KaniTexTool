@@ -6,7 +6,7 @@
 //  Copyright 2011 KageKirin. All rights reserved.
 //
 
-#include "stdafx.h"
+//#include "stdafx.h"
 #include "kaniConverterPVR.h"
 #include "../file/kaniFileTypes.h"
 #include "../file/kaniFileHandler.h"
