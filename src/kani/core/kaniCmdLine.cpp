@@ -12,10 +12,19 @@
 
 #include <vector>
 #include <string>
+#include <iostream>
 #include <stdexcept>
 #include <boost/program_options.hpp>
 #include <boost/preprocessor/seq/elem.hpp>
 #include <boost/preprocessor/stringize.hpp>
+
+#ifdef _WIN32
+#	ifdef _DEBUG
+#		pragma comment(lib, "libboost_program_options-vc90-mt-sgd-1_46_1.lib") 
+#	else
+#		pragma comment(lib, "libboost_program_options-vc90-mt-s-1_46_1.lib") 
+#	endif
+#endif
 
 namespace kani { namespace cmd {
 
