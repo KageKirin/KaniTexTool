@@ -20,3 +20,6 @@ xcuserdata
 *.idb
 *.dep
 */BuildLog.htm
+
+#Assets
+assets/*
