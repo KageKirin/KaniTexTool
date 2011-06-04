@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="Windows-1252"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="9.00"
+	Version="9,00"
 	Name="KaniTexTool"
 	ProjectGUID="{98D85BF8-A7DC-4976-9F3B-105B1FF9B52F}"
 	RootNamespace="KaniTexTool"
@@ -41,11 +41,12 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
+				AdditionalIncludeDirectories="addtional-libs/boost/include;addtional-libs/pvrtex/include;addtional-libs/libpng/include"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
-				UsePrecompiledHeader="2"
+				UsePrecompiledHeader="0"
 				WarningLevel="3"
 				DebugInformationFormat="4"
 			/>
@@ -114,10 +115,11 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
+				AdditionalIncludeDirectories="addtional-libs/boost/include;addtional-libs/pvrtex/include;addtional-libs/libpng/include"
 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
-				UsePrecompiledHeader="2"
+				UsePrecompiledHeader="0"
 				WarningLevel="3"
 				DebugInformationFormat="3"
 			/>
@@ -321,7 +323,19 @@
 			Name="Libs"
 			>
 			<File
+				RelativePath=".\addtional-libs\boost\lib\libboost_program_options-vc90-s-1_46_1.lib"
+				>
+			</File>
+			<File
+				RelativePath=".\addtional-libs\libpng\lib\libpng.lib"
+				>
+			</File>
+			<File
 				RelativePath=".\addtional-libs\pvrtex\lib\Windows_x86_32\PVRTexLib.lib"
+				>
+			</File>
+			<File
+				RelativePath=".\addtional-libs\libpng\lib\zlib.lib"
 				>
 			</File>
 		</Filter>
