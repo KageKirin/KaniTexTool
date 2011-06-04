@@ -7,7 +7,15 @@ xcuserdata
 *.xcuserdatad
 *.xcuserstate
 *.xcscheme
+
+#MSVC resources
 *.suo
 *.ncb
-
 *.vcproj.*.*.user
+*.obj
+*.manifest
+*.ilk
+*.res
+*.pdb
+*.idb
+*/BuildLog.htm
