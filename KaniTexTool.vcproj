@@ -323,7 +323,7 @@
 			Name="Libs"
 			>
 			<File
-				RelativePath=".\addtional-libs\boost\lib\libboost_program_options-vc90-s-1_46_1.lib"
+				RelativePath=".\addtional-libs\boost\lib\libboost_program_options-vc90-mt-gd-1_46_1.lib"
 				>
 			</File>
 			<File
