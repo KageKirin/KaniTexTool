@@ -18,4 +18,5 @@ xcuserdata
 *.res
 *.pdb
 *.idb
+*.dep
 */BuildLog.htm
